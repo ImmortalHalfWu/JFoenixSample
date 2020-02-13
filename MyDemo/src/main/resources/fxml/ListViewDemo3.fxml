@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<StackPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+           fx:controller="wu.controllers.ListViewDemoController"
+           style="-fx-background-color: #654654"
+            prefHeight="659.0" prefWidth="828.0">
+
+    <ListView
+        style="-fx-padding: 0; -fx-end-margin: 0; -fx-start-margin: 0; -fx-background-color: #123123; -fx-background-insets: 0.0"
+        fx:id="listView"/>
+
+</StackPane>

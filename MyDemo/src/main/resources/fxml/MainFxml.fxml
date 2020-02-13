@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<StackPane prefHeight="400.0" prefWidth="600.0"
+           xmlns="http://javafx.com/javafx/8.0.172-ea"
+           xmlns:fx="http://javafx.com/fxml/1"
+>
+
+    <BorderPane fx:id="borderPane">
+
+        <left>
+            <JFXListView
+                fx:id="listView"
+                style="-fx-padding: 5 10 5 10;"
+            />
+        </left>
+
+        <center>
+            <ListView
+                fx:id="productListView"
+                style="-fx-text-fill:WHITE;"
+            />
+        </center>
+
+        <top>
+            <JFXToolbar>
+                <leftItems>
+                    <JFXButton prefWidth="130" prefHeight="40" buttonType="FLAT" text="发布商品"
+                               fx:id="sendProductBt"
+                               style="-fx-font-size:19px; -fx-text-fill:WHITE;"/>
+                    <JFXButton prefWidth="130" prefHeight="40" buttonType="FLAT" text="搜索设备"
+                               fx:id="searchDeviceBt"
+                               style="-fx-font-size:19px; -fx-text-fill:WHITE;"/>
+                </leftItems>
+                <rightItems>
+                    <JFXRippler fx:id="optionsRippler" maskType="CIRCLE"
+                                style="-fx-ripple-color:WHITE;">
+                        <StackPane fx:id="optionsBurger">
+                            <JFXHamburger styleClass="jfx-options-burger">
+                            </JFXHamburger>
+                        </StackPane>
+                    </JFXRippler>
+                </rightItems>
+
+            </JFXToolbar>
+        </top>
+
+
+    </BorderPane>
+
+</StackPane>

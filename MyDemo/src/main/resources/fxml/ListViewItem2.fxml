@@ -1,0 +1,390 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<HBox
+    fx:id="root"
+    minWidth="828"
+    maxWidth="828"
+    style="
+    -fx-min-width: 828; -fx-max-width: 828;
+    -fx-background-color: #eeeeee; -fx-min-height: 253; -fx-max-height: 253"
+    xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1"
+    fx:controller="wu.controllers.ListViewItemController2">
+
+    <StackPane alignment="BOTTOM_RIGHT"
+               maxHeight="248" maxWidth="204"
+               minHeight="248" minWidth="204">
+
+        <StackPane
+            alignment="TOP_LEFT" maxHeight="238" maxWidth="194" minHeight="238" minWidth="194"
+            style="-fx-background-color: WHITE; -fx-background-radius: 10,10,5,5;">
+
+
+            <ImageView
+                fx:id="imageView"
+                fitHeight="135" fitWidth="194.0" pickOnBounds="true">
+                <image>
+                    <Image url="@../../../../../../Downloads/123123.jpg" />
+                </image>
+            </ImageView>
+
+            <Button
+                fx:id="deleteBt"
+                visible="false"
+                prefWidth="97" prefHeight="35" text="删除商品"
+                style="
+                       -fx-background-radius: 2;
+                       -fx-font-size:14px;-fx-background-color:#FB522A;-fx-text-fill: WHITE">
+                <StackPane.margin>
+                    <Insets top="95" />
+                </StackPane.margin>
+            </Button>
+
+            <Button
+                fx:id="editBt"
+                visible="false"
+                prefWidth="97" prefHeight="35" text="编辑商品"
+                style="
+                       -fx-background-radius: 2;
+                       -fx-font-size:14px;-fx-background-color:#FF8130;-fx-text-fill: WHITE">
+                <StackPane.margin>
+                    <Insets top="95" left="97"/>
+                </StackPane.margin>
+            </Button>
+
+
+            <Label minHeight="10" minWidth="194"
+                   style="-fx-background-color: WHITE;">
+                <StackPane.margin>
+                    <Insets top="130" />
+                </StackPane.margin>
+            </Label>
+
+            <!--标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题-->
+            <Label alignment="CENTER" style="-fx-text-fill: #666666; -fx-font-size: 13" text="人教版新编同步AB卷全...">
+                <StackPane.margin>
+                    <Insets top="140" />
+                </StackPane.margin>
+                <StackPane.alignment>TOP_CENTER</StackPane.alignment>
+            </Label>
+
+
+            <!--状态状态状态状态状态状态状态状态状态状态状态状态状态状态状态-->
+            <Label alignment="CENTER" style="-fx-text-fill: #26A426; -fx-font-size: 12" text="发布成功">
+                <StackPane.margin>
+                    <Insets left="24" top="161" />
+                </StackPane.margin>
+            </Label>
+
+            <Label alignment="CENTER" style="-fx-text-fill: #3395DD; -fx-font-size: 12" text="同步成功">
+                <StackPane.margin>
+                    <Insets left="122" top="161" />
+                </StackPane.margin>
+            </Label>
+
+
+            <!--价格价格价格价格价格价格价格价格价格价格价格价格价格价格价格价格价格价格价格-->
+            <Label alignment="CENTER" style="-fx-text-fill: #101010; -fx-font-size: 16" text="29.9">
+                <StackPane.margin>
+                    <Insets left="17" top="185" />
+                </StackPane.margin>
+            </Label>
+            <Label alignment="CENTER" style="-fx-text-fill: #999999; -fx-font-size: 13" text="原价">
+                <StackPane.margin>
+                    <Insets left="21" top="211" />
+                </StackPane.margin>
+            </Label>
+
+            <Label alignment="CENTER" style="-fx-text-fill: #101010; -fx-font-size: 16" text="29.9">
+                <StackPane.margin>
+                    <Insets left="81" top="185" />
+                </StackPane.margin>
+            </Label>
+            <Label alignment="CENTER" style="-fx-text-fill: #999999; -fx-font-size: 13" text="售价">
+                <StackPane.margin>
+                    <Insets left="84" top="211" />
+                </StackPane.margin>
+            </Label>
+
+            <Label alignment="CENTER" style="-fx-text-fill: #101010; -fx-font-size: 16" text="29.9">
+                <StackPane.margin>
+                    <Insets left="144" top="185" />
+                </StackPane.margin>
+            </Label>
+            <Label alignment="CENTER" style="-fx-text-fill: #999999; -fx-font-size: 13" text="售价">
+                <StackPane.margin>
+                    <Insets left="147" top="211" />
+                </StackPane.margin>
+            </Label>
+
+
+
+        </StackPane>
+
+
+
+    </StackPane>
+    <StackPane alignment="BOTTOM_RIGHT"
+               maxHeight="248" maxWidth="204"
+               minHeight="248" minWidth="204">
+
+        <StackPane
+            alignment="TOP_LEFT" maxHeight="238" maxWidth="194" minHeight="238" minWidth="194"
+            style="-fx-background-color: WHITE; -fx-background-radius: 10,10,5,5;">
+
+
+            <ImageView fitHeight="135" fitWidth="194.0" pickOnBounds="true">
+                <image>
+                    <Image url="@../../../../../../Downloads/123123.jpg" />
+                </image></ImageView>
+
+            <Label minHeight="10" minWidth="194"
+                   style="-fx-background-color: WHITE;">
+                <StackPane.margin>
+                    <Insets top="130" />
+                </StackPane.margin>
+            </Label>
+
+
+            <!--标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题-->
+            <Label alignment="CENTER" style="-fx-text-fill: #666666; -fx-font-size: 13" text="人教版新编同步AB卷全...">
+                <StackPane.margin>
+                    <Insets top="140" />
+                </StackPane.margin>
+                <StackPane.alignment>TOP_CENTER</StackPane.alignment>
+            </Label>
+
+
+            <!--状态状态状态状态状态状态状态状态状态状态状态状态状态状态状态-->
+            <Label alignment="CENTER" style="-fx-text-fill: #26A426; -fx-font-size: 12" text="发布成功">
+                <StackPane.margin>
+                    <Insets left="24" top="161" />
+                </StackPane.margin>
+            </Label>
+
+            <Label alignment="CENTER" style="-fx-text-fill: #3395DD; -fx-font-size: 12" text="同步成功">
+                <StackPane.margin>
+                    <Insets left="122" top="161" />
+                </StackPane.margin>
+            </Label>
+
+
+            <!--价格价格价格价格价格价格价格价格价格价格价格价格价格价格价格价格价格价格价格-->
+            <Label alignment="CENTER" style="-fx-text-fill: #101010; -fx-font-size: 16" text="29.9">
+                <StackPane.margin>
+                    <Insets left="17" top="185" />
+                </StackPane.margin>
+            </Label>
+            <Label alignment="CENTER" style="-fx-text-fill: #999999; -fx-font-size: 13" text="原价">
+                <StackPane.margin>
+                    <Insets left="21" top="211" />
+                </StackPane.margin>
+            </Label>
+
+            <Label alignment="CENTER" style="-fx-text-fill: #101010; -fx-font-size: 16" text="29.9">
+                <StackPane.margin>
+                    <Insets left="81" top="185" />
+                </StackPane.margin>
+            </Label>
+            <Label alignment="CENTER" style="-fx-text-fill: #999999; -fx-font-size: 13" text="售价">
+                <StackPane.margin>
+                    <Insets left="84" top="211" />
+                </StackPane.margin>
+            </Label>
+
+            <Label alignment="CENTER" style="-fx-text-fill: #101010; -fx-font-size: 16" text="29.9">
+                <StackPane.margin>
+                    <Insets left="144" top="185" />
+                </StackPane.margin>
+            </Label>
+            <Label alignment="CENTER" style="-fx-text-fill: #999999; -fx-font-size: 13" text="售价">
+                <StackPane.margin>
+                    <Insets left="147" top="211" />
+                </StackPane.margin>
+            </Label>
+
+
+
+        </StackPane>
+
+
+
+    </StackPane>
+    <StackPane alignment="BOTTOM_RIGHT"
+               maxHeight="248" maxWidth="204"
+               minHeight="248" minWidth="204">
+
+        <StackPane
+            alignment="TOP_LEFT" maxHeight="238" maxWidth="194" minHeight="238" minWidth="194"
+            style="-fx-background-color: WHITE; -fx-background-radius: 10,10,5,5;">
+
+
+            <ImageView fitHeight="135" fitWidth="194.0" pickOnBounds="true">
+                <image>
+                    <Image url="@../../../../../../Downloads/123123.jpg" />
+                </image></ImageView>
+
+            <Label minHeight="10" minWidth="194"
+                   style="-fx-background-color: WHITE;">
+                <StackPane.margin>
+                    <Insets top="130" />
+                </StackPane.margin>
+            </Label>
+
+
+            <!--标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题-->
+            <Label alignment="CENTER" style="-fx-text-fill: #666666; -fx-font-size: 13" text="人教版新编同步AB卷全...">
+                <StackPane.margin>
+                    <Insets top="140" />
+                </StackPane.margin>
+                <StackPane.alignment>TOP_CENTER</StackPane.alignment>
+            </Label>
+
+
+            <!--状态状态状态状态状态状态状态状态状态状态状态状态状态状态状态-->
+            <Label alignment="CENTER" style="-fx-text-fill: #26A426; -fx-font-size: 12" text="发布成功">
+                <StackPane.margin>
+                    <Insets left="24" top="161" />
+                </StackPane.margin>
+            </Label>
+
+            <Label alignment="CENTER" style="-fx-text-fill: #3395DD; -fx-font-size: 12" text="同步成功">
+                <StackPane.margin>
+                    <Insets left="122" top="161" />
+                </StackPane.margin>
+            </Label>
+
+
+            <!--价格价格价格价格价格价格价格价格价格价格价格价格价格价格价格价格价格价格价格-->
+            <Label alignment="CENTER" style="-fx-text-fill: #101010; -fx-font-size: 16" text="29.9">
+                <StackPane.margin>
+                    <Insets left="17" top="185" />
+                </StackPane.margin>
+            </Label>
+            <Label alignment="CENTER" style="-fx-text-fill: #999999; -fx-font-size: 13" text="原价">
+                <StackPane.margin>
+                    <Insets left="21" top="211" />
+                </StackPane.margin>
+            </Label>
+
+            <Label alignment="CENTER" style="-fx-text-fill: #101010; -fx-font-size: 16" text="29.9">
+                <StackPane.margin>
+                    <Insets left="81" top="185" />
+                </StackPane.margin>
+            </Label>
+            <Label alignment="CENTER" style="-fx-text-fill: #999999; -fx-font-size: 13" text="售价">
+                <StackPane.margin>
+                    <Insets left="84" top="211" />
+                </StackPane.margin>
+            </Label>
+
+            <Label alignment="CENTER" style="-fx-text-fill: #101010; -fx-font-size: 16" text="29.9">
+                <StackPane.margin>
+                    <Insets left="144" top="185" />
+                </StackPane.margin>
+            </Label>
+            <Label alignment="CENTER" style="-fx-text-fill: #999999; -fx-font-size: 13" text="售价">
+                <StackPane.margin>
+                    <Insets left="147" top="211" />
+                </StackPane.margin>
+            </Label>
+
+
+
+        </StackPane>
+
+
+
+    </StackPane>
+    <StackPane alignment="BOTTOM_RIGHT"
+               maxHeight="248" maxWidth="204"
+               minHeight="248" minWidth="204">
+
+        <StackPane
+            alignment="TOP_LEFT" maxHeight="238" maxWidth="194" minHeight="238" minWidth="194"
+            style="-fx-background-color: WHITE; -fx-background-radius: 10,10,5,5;">
+
+
+            <ImageView fitHeight="135" fitWidth="194.0" pickOnBounds="true">
+                <image>
+                    <Image url="@../../../../../../Downloads/123123.jpg" />
+                </image></ImageView>
+
+            <Label minHeight="10" minWidth="194"
+                   style="-fx-background-color: WHITE;">
+                <StackPane.margin>
+                    <Insets top="130" />
+                </StackPane.margin>
+            </Label>
+
+
+            <!--标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题标题-->
+            <Label alignment="CENTER" style="-fx-text-fill: #666666; -fx-font-size: 13" text="人教版新编同步AB卷全...">
+                <StackPane.margin>
+                    <Insets top="140" />
+                </StackPane.margin>
+                <StackPane.alignment>TOP_CENTER</StackPane.alignment>
+            </Label>
+
+
+            <!--状态状态状态状态状态状态状态状态状态状态状态状态状态状态状态-->
+            <Label alignment="CENTER" style="-fx-text-fill: #26A426; -fx-font-size: 12" text="发布成功">
+                <StackPane.margin>
+                    <Insets left="24" top="161" />
+                </StackPane.margin>
+            </Label>
+
+            <Label alignment="CENTER" style="-fx-text-fill: #3395DD; -fx-font-size: 12" text="同步成功">
+                <StackPane.margin>
+                    <Insets left="122" top="161" />
+                </StackPane.margin>
+            </Label>
+
+
+            <!--价格价格价格价格价格价格价格价格价格价格价格价格价格价格价格价格价格价格价格-->
+            <Label alignment="CENTER" style="-fx-text-fill: #101010; -fx-font-size: 16" text="29.9">
+                <StackPane.margin>
+                    <Insets left="17" top="185" />
+                </StackPane.margin>
+            </Label>
+            <Label alignment="CENTER" style="-fx-text-fill: #999999; -fx-font-size: 13" text="原价">
+                <StackPane.margin>
+                    <Insets left="21" top="211" />
+                </StackPane.margin>
+            </Label>
+
+            <Label alignment="CENTER" style="-fx-text-fill: #101010; -fx-font-size: 16" text="29.9">
+                <StackPane.margin>
+                    <Insets left="81" top="185" />
+                </StackPane.margin>
+            </Label>
+            <Label alignment="CENTER" style="-fx-text-fill: #999999; -fx-font-size: 13" text="售价">
+                <StackPane.margin>
+                    <Insets left="84" top="211" />
+                </StackPane.margin>
+            </Label>
+
+            <Label alignment="CENTER" style="-fx-text-fill: #101010; -fx-font-size: 16" text="29.9">
+                <StackPane.margin>
+                    <Insets left="144" top="185" />
+                </StackPane.margin>
+            </Label>
+            <Label alignment="CENTER" style="-fx-text-fill: #999999; -fx-font-size: 13" text="售价">
+                <StackPane.margin>
+                    <Insets left="147" top="211" />
+                </StackPane.margin>
+            </Label>
+
+
+
+        </StackPane>
+
+
+
+    </StackPane>
+
+</HBox>
+
