@@ -1,7 +1,6 @@
 package wu.controllers;
 
 import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXListView;
 import com.jfoenix.controls.JFXRippler;
 import com.jfoenix.svg.SVGGlyph;
 import com.jfoenix.svg.SVGGlyphLoader;
@@ -12,17 +11,19 @@ import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.geometry.Bounds;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.util.Callback;
+import wu.weights.ProductListItemView;
+import wu.weights.beans.ProductItemChildViewBean;
 
 import javax.annotation.PostConstruct;
+import java.util.ArrayList;
+import java.util.List;
 
 @ViewController(value = "/fxml/MainFxml.fxml", title = "我的demo")
 public final class MainController {
@@ -34,13 +35,13 @@ public final class MainController {
     @FXML
     private StackPane optionsBurger;
     @FXML
-    private JFXListView<javafx.scene.control.Label> listView;
+    private ListView<javafx.scene.control.Label> listView;
     @FXML
     private JFXButton sendProductBt;
     @FXML
     private JFXButton searchDeviceBt;
     @FXML
-    private ListView<HBox> productListView;
+    private ListView<ProductListItemView> productListView;
     @FXML
     private BorderPane borderPane;
 
@@ -48,22 +49,15 @@ public final class MainController {
     @PostConstruct
     public void init() throws Exception {
 
+        setBtIco(sendProductBt, "icomoon.svg.paper-plane-o, send-o");
+        setBtIco(searchDeviceBt, "icomoon.svg.search2");
+
+        listView.getStyleClass().add("device-list");
+        listView.setPrefWidth(185);
+
         new Thread() {
             @Override
             public void run() {
-                try {
-                    Thread.sleep(100);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-
-                Platform.runLater(new Runnable() {
-                    @Override
-                    public void run() {
-                        listView.depthProperty().set(1);
-                        listView.setExpanded(true);
-                    }
-                });
 
                 for (int i = 0; i < 30; i++) {
                     listView.getItems().add(new javafx.scene.control.Label("JFXListView" + i));
@@ -84,38 +78,55 @@ public final class MainController {
                     @Override
                     public void run() {
 
-                        Bounds boundsInParent = borderPane.getCenter().getBoundsInParent();
-                        Bounds boundsInLocal = borderPane.getCenter().getBoundsInLocal();
+                        Bounds boundsInParent = borderPane.getLeft().getBoundsInParent();
+                        Bounds boundsInLocal = borderPane.getLeft().getBoundsInLocal();
                         System.out.println(boundsInLocal.getHeight() + "_" + boundsInLocal.getWidth() + "\n" +
                             boundsInParent.getHeight() + "_" + boundsInParent.getWidth());
                     }
                 });
             }
         }.start();
-        setBtIco(sendProductBt, "icomoon.svg.paper-plane-o, send-o");
-        setBtIco(searchDeviceBt, "icomoon.svg.search2");
 
 
-        ObservableList<HBox> objects = FXCollections.observableArrayList();
         long s = System.currentTimeMillis();
-        for (int i = 0; i < 30; i++) {
-            objects.add(FXMLLoader.load(getClass().getResource("/fxml/ListViewItem.fxml")));
+        ObservableList<ProductListItemView> itemViews = FXCollections.observableArrayList();
+        List<ProductItemChildViewBean> datas = new ArrayList<>();
+        for (int i = 0; i < 15; i++) {
+            if (datas.size() == 4 || (i == 14  && datas.size() > 0)) {
+                itemViews.add(new ProductListItemView(datas));
+                datas.clear();
+            }
+            datas.add(ProductItemChildViewBean.create(
+                "http://img14.360buyimg.com/imgzone/jfs/t1/91657/8/11629/198826/5e37e559E5ee5ce2a/cfb8d362d9d01210.jpg?imageMogr2/strip/format/jpg",
+                "商品：商品：商品：商品：商品：商品：商品：商品：商品：商品：商品：" + i,
+                "2020/02/13",
+                "发布成功",
+                "#26A426",
+                "" + i + 1000,
+                "" + i * 2  + 1000,
+                "" + i  + 1000
+            ));
         }
+
         long e = System.currentTimeMillis();
         System.out.println((e - s));
+
         productListView.setStyle("-fx-background-color: #eeeeee");
-        productListView.setCellFactory(new Callback<javafx.scene.control.ListView<HBox>, ListCell<HBox>>() {
+        productListView.setCellFactory(new Callback<javafx.scene.control.ListView<ProductListItemView>, ListCell<ProductListItemView>>() {
             @Override
-            public ListCell<HBox> call(javafx.scene.control.ListView<HBox> param) {
-                return new ListCell<HBox>() {
+            public ListCell<ProductListItemView> call(javafx.scene.control.ListView<ProductListItemView> param) {
+                return new ListCell<ProductListItemView>() {
                     @Override
-                    protected void updateItem(HBox item, boolean empty) {
-                        this.setGraphic(item);
+                    protected void updateItem(ProductListItemView item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (!empty) {
+                            this.setGraphic(item);
+                        }
                     }
                 };
             }
         });
-        productListView.setItems(objects);
+        productListView.setItems(itemViews);
 
     }
 
@@ -125,6 +136,5 @@ public final class MainController {
         icoMoonGlyph.setSize(20, 20);
         bt.setGraphic(icoMoonGlyph);
     }
-
 
 }

@@ -49,7 +49,7 @@ public class Main extends Application {
         decorator.setCustomMaximize(false);
         decorator.setMaximized(false);
 
-        stage.setTitle("我的Demo");
+        stage.setTitle("智淘交易助手");
         stage.setResizable(false);
 
         Scene scene = new Scene(decorator, 1024, 760);

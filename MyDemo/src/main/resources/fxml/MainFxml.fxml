@@ -13,7 +13,7 @@
     <BorderPane fx:id="borderPane">
 
         <left>
-            <JFXListView
+            <ListView
                 fx:id="listView"
                 style="-fx-padding: 5 10 5 10;"
             />
