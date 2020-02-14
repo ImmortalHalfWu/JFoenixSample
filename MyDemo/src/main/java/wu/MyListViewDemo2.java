@@ -5,13 +5,14 @@ import com.jfoenix.svg.SVGGlyphLoader;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
-import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import javafx.util.Callback;
+import wu.weights.DeviceListItemView;
+import wu.weights.beans.DeviceItemViewBean;
 
 import java.io.IOException;
 
@@ -34,22 +35,31 @@ public class MyListViewDemo2 extends Application {
         thread.start();
         thread.join();
 
-        ObservableList<HBox> objects = FXCollections.observableArrayList();
+        ObservableList<Node> objects = FXCollections.observableArrayList();
         long s = System.currentTimeMillis();
+        objects.add(new DeviceListItemView(DeviceItemViewBean.createConnectLoginBean("", "朴素不朴素")));
+        objects.add(new DeviceListItemView(DeviceItemViewBean.createDisconnectLoginBean("", "朴素不朴素")));
+        objects.add(new DeviceListItemView(DeviceItemViewBean.createConnectUnLoginBean("")));
+
         for (int i = 0; i < 30; i++) {
-            objects.add(FXMLLoader.load(getClass().getResource("/fxml/ListViewItem.fxml")));
+//            objects.add(FXMLLoader.load(getClass().getResource("/fxml/DeviceListItem.fxml")));
+            objects.add(new DeviceListItemView(DeviceItemViewBean.createConnectLoginBean("", "朴素不朴素")));
         }
+
         long e = System.currentTimeMillis();
         System.out.println((e - s));
-        ListView<HBox> listView = new ListView<>();
-        listView.setStyle("-fx-background-color: #eeeeee");
-        listView.setCellFactory(new Callback<ListView<HBox>, ListCell<HBox>>() {
+        ListView<Node> listView = new ListView<>();
+        listView.getStyleClass().add("device-list");
+        listView.setCellFactory(new Callback<ListView<Node>, ListCell<Node>>() {
             @Override
-            public ListCell<HBox> call(ListView<HBox> param) {
-                return new ListCell<HBox>() {
+            public ListCell<Node> call(ListView<Node> param) {
+                return new ListCell<Node>() {
                     @Override
-                    protected void updateItem(HBox item, boolean empty) {
-                        this.setGraphic(item);
+                    protected void updateItem(Node item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (!empty) {
+                            this.setGraphic(item);
+                        }
                     }
                 };
             }

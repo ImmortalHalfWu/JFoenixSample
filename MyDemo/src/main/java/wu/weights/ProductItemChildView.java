@@ -91,7 +91,7 @@ public class ProductItemChildView extends JFXRippler {
             clip.setArcWidth(20);
             clip.setArcHeight(20);
             productImage.setClip(clip);
-            Image imageUrl = new Image(dataBean.getImageUrl());
+            Image imageUrl = new Image(dataBean.getImageUrl(), true);
             productImage.setImage(imageUrl);
             nodesTemps.add(productImage);
 

@@ -368,7 +368,7 @@
     -fx-padding: 0;
     -fx-label-padding: 0;
     -fx-font-family: Roboto;
-    -fx-background-color: #eeeeee;
+    -fx-background-color: #fff;
 }
 .list-cell:empty {
     -fx-padding: 0;
@@ -402,10 +402,15 @@
 }
 
 .device-list .list-cell:selected {
-    -fx-padding: 0;
+    -fx-padding: 15;
     -fx-label-padding: 0;
     -fx-background-color: #eeeeee;
+    -fx-scale-y: 1.15;
+    -fx-scale-x: 1.15;
 }
+/*"-fx-padding: 10;" + "-fx-border-style: solid inside;"*/
+/*+ "-fx-border-width: 2;" + "-fx-border-insets: 5;"*/
+/*+ "-fx-border-radius: 5;" + "-fx-border-color: blue;"*/
 
 .device-list .list-cell:empty {
     -fx-padding: 0;

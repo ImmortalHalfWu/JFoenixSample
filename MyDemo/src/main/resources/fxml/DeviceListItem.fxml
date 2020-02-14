@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.scene.image.ImageView?>
+<?import javafx.geometry.Insets?>
+<StackPane xmlns="http://javafx.com/javafx"
+           alignment="TOP_LEFT"
+           prefHeight="55"
+           minHeight="55"
+           maxHeight="55"
+           prefWidth="185"
+           minWidth="185"
+           maxWidth="185">
+
+    <ImageView fitWidth="15" fitHeight="15" style="-fx-background-color: #123123">
+        <StackPane.margin>
+            <Insets left="8" top="8"/>
+        </StackPane.margin>
+    </ImageView>
+
+    <Label style="-fx-font-size: 12;  -fx-text-fill: #888888">
+        未连接
+        <StackPane.margin>
+            <Insets left="21" top="8"/>
+        </StackPane.margin>
+    </Label>
+
+    <Label style="-fx-font-size: 16; -fx-text-fill: #888888">
+        未登录
+
+        <StackPane.margin>
+            <Insets left="8" bottom="8"/>
+        </StackPane.margin>
+        <StackPane.alignment>BOTTOM_LEFT</StackPane.alignment>
+    </Label>
+
+</StackPane>

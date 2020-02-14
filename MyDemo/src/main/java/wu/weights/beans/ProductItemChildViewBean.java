@@ -15,11 +15,20 @@ public class ProductItemChildViewBean extends BaseViewBean {
         String imageUrl, String productName, String time, String stateString, String stateColor, String oldPrice, String nowPrice, String profitPrice
     ) {
         return new ProductItemChildViewBean(
-            imageUrl, productName, time, stateString, stateColor, oldPrice, nowPrice, profitPrice
+            "", imageUrl, productName, time, stateString, stateColor, oldPrice, nowPrice, profitPrice
         );
     }
 
-    private ProductItemChildViewBean(String imageUrl, String productName, String time, String stateString, String stateColor, String oldPrice, String nowPrice, String profitPrice) {
+    public static ProductItemChildViewBean create(
+        Object tag, String imageUrl, String productName, String time, String stateString, String stateColor, String oldPrice, String nowPrice, String profitPrice
+    ) {
+        return new ProductItemChildViewBean(
+            "", imageUrl, productName, time, stateString, stateColor, oldPrice, nowPrice, profitPrice
+        );
+    }
+
+    private ProductItemChildViewBean(Object tag, String imageUrl, String productName, String time, String stateString, String stateColor, String oldPrice, String nowPrice, String profitPrice) {
+        super(tag);
         this.imageUrl = imageUrl;
         this.productName = productName;
         this.time = time;

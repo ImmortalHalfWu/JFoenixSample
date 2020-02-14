@@ -15,7 +15,7 @@
         <left>
             <ListView
                 fx:id="listView"
-                style="-fx-padding: 5 10 5 10;"
+                style="-fx-text-fill:WHITE;"
             />
         </left>
 

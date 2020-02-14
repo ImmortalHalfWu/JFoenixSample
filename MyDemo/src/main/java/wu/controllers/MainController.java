@@ -7,18 +7,18 @@ import com.jfoenix.svg.SVGGlyphLoader;
 import io.datafx.controller.ViewController;
 import io.datafx.controller.flow.context.FXMLViewFlowContext;
 import io.datafx.controller.flow.context.ViewFlowContext;
-import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.geometry.Bounds;
-import javafx.scene.control.ListCell;
+import javafx.scene.Node;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
-import javafx.util.Callback;
+import wu.adapters.BaseListViewAdapter;
+import wu.weights.DeviceListItemView;
 import wu.weights.ProductListItemView;
+import wu.weights.beans.DeviceItemViewBean;
 import wu.weights.beans.ProductItemChildViewBean;
 
 import javax.annotation.PostConstruct;
@@ -35,13 +35,13 @@ public final class MainController {
     @FXML
     private StackPane optionsBurger;
     @FXML
-    private ListView<javafx.scene.control.Label> listView;
+    private ListView<Node> listView;
     @FXML
     private JFXButton sendProductBt;
     @FXML
     private JFXButton searchDeviceBt;
     @FXML
-    private ListView<ProductListItemView> productListView;
+    private ListView<Node> productListView;
     @FXML
     private BorderPane borderPane;
 
@@ -54,42 +54,15 @@ public final class MainController {
 
         listView.getStyleClass().add("device-list");
         listView.setPrefWidth(185);
-
-        new Thread() {
-            @Override
-            public void run() {
-
-                for (int i = 0; i < 30; i++) {
-                    listView.getItems().add(new javafx.scene.control.Label("JFXListView" + i));
-                }
-            }
-        }
-        .start()
-        ;
-        new Thread() {
-            @Override
-            public void run() {
-                try {
-                    Thread.sleep(3000);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-                Platform.runLater(new Runnable() {
-                    @Override
-                    public void run() {
-
-                        Bounds boundsInParent = borderPane.getLeft().getBoundsInParent();
-                        Bounds boundsInLocal = borderPane.getLeft().getBoundsInLocal();
-                        System.out.println(boundsInLocal.getHeight() + "_" + boundsInLocal.getWidth() + "\n" +
-                            boundsInParent.getHeight() + "_" + boundsInParent.getWidth());
-                    }
-                });
-            }
-        }.start();
-
+        listView.setCellFactory(new BaseListViewAdapter<>());
+        ObservableList<Node> deviceDatas = FXCollections.observableArrayList();
+        deviceDatas.add(new DeviceListItemView(DeviceItemViewBean.createConnectLoginBean("", "朴素不朴素")));
+        deviceDatas.add(new DeviceListItemView(DeviceItemViewBean.createDisconnectLoginBean("", "朴素不朴素")));
+        deviceDatas.add(new DeviceListItemView(DeviceItemViewBean.createConnectUnLoginBean("")));
+        listView.setItems(deviceDatas);
 
         long s = System.currentTimeMillis();
-        ObservableList<ProductListItemView> itemViews = FXCollections.observableArrayList();
+        ObservableList<Node> itemViews = FXCollections.observableArrayList();
         List<ProductItemChildViewBean> datas = new ArrayList<>();
         for (int i = 0; i < 15; i++) {
             if (datas.size() == 4 || (i == 14  && datas.size() > 0)) {
@@ -112,20 +85,7 @@ public final class MainController {
         System.out.println((e - s));
 
         productListView.setStyle("-fx-background-color: #eeeeee");
-        productListView.setCellFactory(new Callback<javafx.scene.control.ListView<ProductListItemView>, ListCell<ProductListItemView>>() {
-            @Override
-            public ListCell<ProductListItemView> call(javafx.scene.control.ListView<ProductListItemView> param) {
-                return new ListCell<ProductListItemView>() {
-                    @Override
-                    protected void updateItem(ProductListItemView item, boolean empty) {
-                        super.updateItem(item, empty);
-                        if (!empty) {
-                            this.setGraphic(item);
-                        }
-                    }
-                };
-            }
-        });
+        productListView.setCellFactory(new BaseListViewAdapter<>());
         productListView.setItems(itemViews);
 
     }
