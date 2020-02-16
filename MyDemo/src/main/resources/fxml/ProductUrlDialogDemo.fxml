@@ -1,0 +1,361 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXToggleNode?>
+<?import com.jfoenix.validation.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import org.kordamp.ikonli.javafx.*?>
+<?import wu.weights.*?>
+<?import javafx.scene.control.ListView?>
+<?import com.jfoenix.controls.JFXButton?>
+<StackPane alignment="TOP_CENTER" prefHeight="653.0" prefWidth="500.0"
+           fx:controller="wu.controllers.ProductSettingController"
+           xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1">
+
+
+    <padding>
+        <Insets top="26" right="36" bottom="26" left="36" />
+    </padding>
+
+
+    <Label styleClass="title-label" style="-fx-padding: 0; -fx-font-size: 18">
+        商品信息
+        <StackPane.alignment>TOP_LEFT</StackPane.alignment>
+    </Label>
+
+
+    <VBox >
+        <!--<StackPane.margin>-->
+            <!--<Insets top="40"/>-->
+        <!--</StackPane.margin>-->
+
+        <MJFXTextField id="jfxTextArea" labelFloat="true"
+                       prefHeight="29"
+                       prefWidth="Infinity" promptText="商品地址">
+            <validators>
+                <RequiredFieldValidator message="We would love to get your feedback.">
+                    <FontIcon iconLiteral="fas-exclamation-triangle" />
+                </RequiredFieldValidator>
+            </validators>
+            <font>
+                <Font size="14.0" />
+            </font>
+            <VBox.margin>
+                <Insets top="40"/>
+            </VBox.margin>
+
+        </MJFXTextField>
+
+        <MJFXTextField id="jfxTextArea" labelFloat="true"
+                      prefHeight="29" prefWidth="Infinity" promptText="商品描述">
+            <validators>
+                <RequiredFieldValidator message="We would love to get your feedback.">
+                    <FontIcon iconLiteral="fas-exclamation-triangle" />
+                </RequiredFieldValidator>
+            </validators>
+            <font>
+                <Font size="14.0" />
+            </font>
+            <VBox.margin>
+                <Insets top="40"/>
+            </VBox.margin>
+        </MJFXTextField>
+
+
+        <Label styleClass="title-label" style="-fx-padding: 0; -fx-font-size: 18">
+            商品价格
+            <StackPane.alignment>TOP_LEFT</StackPane.alignment>
+            <VBox.margin>
+                <Insets top="26"/>
+            </VBox.margin>
+        </Label>
+
+        <HBox spacing="40">
+            <VBox.margin>
+                <Insets top="20"/>
+            </VBox.margin>
+            <MJFXTextField id="jfxTextArea" labelFloat="true"
+                           prefHeight="29" prefWidth="80" promptText="原价">
+                <validators>
+                    <RequiredFieldValidator message="We would love to get your feedback.">
+                        <FontIcon iconLiteral="fas-exclamation-triangle" />
+                    </RequiredFieldValidator>
+                </validators>
+                <font>
+                    <Font size="14.0" />
+                </font>
+            </MJFXTextField>
+
+            <MJFXTextField id="jfxTextArea" labelFloat="true"
+                           prefHeight="29" prefWidth="80" promptText="售价">
+                <validators>
+                    <RequiredFieldValidator message="We would love to get your feedback.">
+                        <FontIcon iconLiteral="fas-exclamation-triangle" />
+                    </RequiredFieldValidator>
+                </validators>
+                <font>
+                    <Font size="14.0" />
+                </font>
+            </MJFXTextField>
+
+            <MJFXTextField id="jfxTextArea" labelFloat="true"
+                           text="0.0"
+                           prefHeight="29" prefWidth="80" promptText="运费">
+                <validators>
+                    <RequiredFieldValidator message="We would love to get your feedback.">
+                        <FontIcon iconLiteral="fas-exclamation-triangle" />
+                    </RequiredFieldValidator>
+                </validators>
+                <font>
+                    <Font size="14.0" />
+                </font>
+            </MJFXTextField>
+
+        </HBox>
+
+
+        <Label styleClass="title-label" style="-fx-padding: 0; -fx-font-size: 18">
+            标签选择
+            <StackPane.alignment>TOP_LEFT</StackPane.alignment>
+            <VBox.margin>
+                <Insets top="26"/>
+            </VBox.margin>
+        </Label>
+
+
+        <FlowPane vgap="10" hgap="10">
+            <VBox.margin>
+                <Insets top="5"/>
+            </VBox.margin>
+
+            <JFXToggleNode styleClass="toggle-tag"
+                           prefWidth="-Infinity"
+                           pickOnBounds="false">
+                <padding>
+                    <Insets topRightBottomLeft="0"/>
+                </padding>
+                <Label text="精精精"
+                       alignment="CENTER"
+                       style="
+                       -fx-min-width: 62;
+                       -fx-font-size: 12;">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                </Label>
+            </JFXToggleNode>
+            <JFXToggleNode styleClass="toggle-icon1"
+                           prefWidth="-Infinity"
+                           style="
+                            -fx-pref-width: -Infinity;-fx-pref-height: -Infinity;
+                            -fx-background-radius: 10px;
+                            -jfx-toggle-color: YELLOW;"
+                           pickOnBounds="false">
+                <padding>
+                    <Insets topRightBottomLeft="0"/>
+                </padding>
+                <Label text="精精精"
+                       alignment="CENTER"
+                       style="-fx-text-fill: #696969;
+                       -fx-min-width: 62;
+                       -fx-font-size: 12;
+                       -fx-padding: 5;
+                       -fx-border-width: 2;
+                       -fx-border-radius: 10;
+                       -fx-border-color: #C0C0C0;">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                </Label>
+            </JFXToggleNode>
+            <JFXToggleNode styleClass="toggle-icon1"
+                           prefWidth="-Infinity"
+                           style="
+                            -fx-pref-width: -Infinity;-fx-pref-height: -Infinity;
+                            -fx-background-radius: 10px;
+                            -jfx-toggle-color: #C0C0C0;"
+                           pickOnBounds="false">
+                <padding>
+                    <Insets topRightBottomLeft="0"/>
+                </padding>
+                <Label text="精精精"
+                       alignment="CENTER"
+                       style="-fx-text-fill: #696969;
+                       -fx-min-width: 62;
+                       -fx-font-size: 12;
+                       -fx-padding: 5;
+                       -fx-border-width: 2;
+                       -fx-border-radius: 10;
+                       -fx-border-color: #C0C0C0;">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                </Label>
+            </JFXToggleNode>
+            <JFXToggleNode styleClass="toggle-icon1"
+                           prefWidth="-Infinity"
+                           style="
+                            -fx-pref-width: -Infinity;-fx-pref-height: -Infinity;
+                            -fx-background-radius: 10px;
+                            -jfx-toggle-color: #C0C0C0;"
+                           pickOnBounds="false">
+                <padding>
+                    <Insets topRightBottomLeft="0"/>
+                </padding>
+                <Label text="精精精"
+                       alignment="CENTER"
+                       style="-fx-text-fill: #696969;
+                       -fx-min-width: 62;
+                       -fx-font-size: 12;
+                       -fx-padding: 5;
+                       -fx-border-width: 2;
+                       -fx-border-radius: 10;
+                       -fx-border-color: #C0C0C0;">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                </Label>
+            </JFXToggleNode>
+            <JFXToggleNode styleClass="toggle-icon1"
+                           prefWidth="-Infinity"
+                           style="
+                            -fx-pref-width: -Infinity;-fx-pref-height: -Infinity;
+                            -fx-background-radius: 10px;
+                            -jfx-toggle-color: #C0C0C0;"
+                           pickOnBounds="false">
+                <padding>
+                    <Insets topRightBottomLeft="0"/>
+                </padding>
+                <Label text="精精精"
+                       alignment="CENTER"
+                       style="-fx-text-fill: #696969;
+                       -fx-min-width: 62;
+                       -fx-font-size: 12;
+                       -fx-padding: 5;
+                       -fx-border-width: 2;
+                       -fx-border-radius: 10;
+                       -fx-border-color: #C0C0C0;">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                </Label>
+            </JFXToggleNode>
+            <JFXToggleNode styleClass="toggle-icon1"
+                           prefWidth="-Infinity"
+                           style="
+                            -fx-pref-width: -Infinity;-fx-pref-height: -Infinity;
+                            -fx-background-radius: 10px;
+                            -jfx-toggle-color: #C0C0C0;"
+                           pickOnBounds="false">
+                <padding>
+                    <Insets topRightBottomLeft="0"/>
+                </padding>
+                <Label text="精精精"
+                       alignment="CENTER"
+                       style="-fx-text-fill: #696969;
+                       -fx-min-width: 62;
+                       -fx-font-size: 12;
+                       -fx-padding: 5;
+                       -fx-border-width: 2;
+                       -fx-border-radius: 10;
+                       -fx-border-color: #C0C0C0;">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                </Label>
+            </JFXToggleNode>
+            <JFXToggleNode styleClass="toggle-icon1"
+                           prefWidth="-Infinity"
+                           style="
+                            -fx-pref-width: -Infinity;-fx-pref-height: -Infinity;
+                            -fx-background-radius: 10px;
+                            -jfx-toggle-color: #C0C0C0;"
+                           pickOnBounds="false">
+                <padding>
+                    <Insets topRightBottomLeft="0"/>
+                </padding>
+                <Label text="精精精"
+                       alignment="CENTER"
+                       style="-fx-text-fill: #696969;
+                       -fx-min-width: 62;
+                       -fx-font-size: 12;
+                       -fx-padding: 5;
+                       -fx-border-width: 2;
+                       -fx-border-radius: 10;
+                       -fx-border-color: #C0C0C0;">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                </Label>
+            </JFXToggleNode>
+            <JFXToggleNode styleClass="toggle-icon1"
+                           prefWidth="-Infinity"
+                           style="
+                            -fx-pref-width: -Infinity;-fx-pref-height: -Infinity;
+                            -fx-background-radius: 10px;
+                            -jfx-toggle-color: #C0C0C0;"
+                           pickOnBounds="false">
+                <padding>
+                    <Insets topRightBottomLeft="0"/>
+                </padding>
+                <Label text="精精精"
+                       alignment="CENTER"
+                       style="-fx-text-fill: #696969;
+                       -fx-min-width: 62;
+                       -fx-font-size: 12;
+                       -fx-padding: 5;
+                       -fx-border-width: 2;
+                       -fx-border-radius: 10;
+                       -fx-border-color: #C0C0C0;">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                </Label>
+            </JFXToggleNode>
+        </FlowPane>
+
+
+        <Label styleClass="title-label" style="-fx-padding: 0; -fx-font-size: 18">
+            图片选择
+            <StackPane.alignment>TOP_LEFT</StackPane.alignment>
+            <VBox.margin>
+                <Insets top="26"/>
+            </VBox.margin>
+        </Label>
+
+        <ListView fx:id="listView"
+                  orientation="HORIZONTAL"
+                  style="-fx-padding: 0; -fx-pref-height: 143">
+            <VBox.margin>
+                <Insets top="5"/>
+            </VBox.margin>
+            <!--<StackPane prefWidth="132" prefHeight="22" style="-fx-background-color: #123123"></StackPane>-->
+        </ListView>
+
+
+        <HBox nodeOrientation="RIGHT_TO_LEFT" alignment="CENTER_LEFT" spacing="26">
+            <VBox.margin>
+            <Insets top="20"/>
+            </VBox.margin>
+
+            <JFXButton prefWidth="100" prefHeight="40" text="发布"
+                       alignment="CENTER"
+                       style="-fx-text-fill:#15a7f4;
+                        -fx-padding: 0;
+                        -fx-pref-width: 40;
+                        -fx-pref-height: 20;
+                        -fx-font-size:20;">
+            </JFXButton>
+
+            <JFXButton text="信息错误?"
+                       alignment="BOTTOM_CENTER"
+                       style="-fx-text-fill:#FB522A;
+                        -fx-padding: 0;
+                          -fx-pref-width: 63; -fx-pref-height: 15">
+            </JFXButton>
+        </HBox>
+    </VBox>
+
+</StackPane>

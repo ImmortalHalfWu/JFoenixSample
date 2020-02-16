@@ -29,9 +29,9 @@
     -fx-font-weight: BOLD;
     -fx-prompt-text-fill: #808080;
     -fx-alignment: top-left;
-    -jfx-focus-color: #4059A9;
-    -jfx-unfocus-color: #4d4d4d;
-    -fx-max-width: 300;
+    -jfx-focus-color: #15a7f4;
+    -jfx-unfocus-color: #999999;
+    -fx-max-width: Infinity;
 }
 
 .jfx-decorator {
@@ -408,11 +408,43 @@
     -fx-scale-y: 1.15;
     -fx-scale-x: 1.15;
 }
-/*"-fx-padding: 10;" + "-fx-border-style: solid inside;"*/
-/*+ "-fx-border-width: 2;" + "-fx-border-insets: 5;"*/
-/*+ "-fx-border-radius: 5;" + "-fx-border-color: blue;"*/
 
-.device-list .list-cell:empty {
+.product-setting-list .list-cell:empty {
+    -fx-padding: 0;
+    -fx-label-padding: 0;
+    -fx-background-color: WHITE;
+}
+
+
+.product-setting-list {
+    -fx-padding: 0;
+    -fx-label-padding: 0;
+    -fx-background-insets: 0.0;
+}
+
+.product-setting-list .list-cell {
+    -fx-padding: 0;
+    -fx-label-padding: 0;
+}
+.product-setting-list .list-cell:even {
+    -fx-padding: 0;
+    -fx-label-padding: 0;
+    -fx-background-color: WHITE;
+    -fx-start-margin: 0;
+    -fx-end-margin: 0;
+}
+
+.product-setting-list .list-cell:odd {
+    -fx-padding: 0;
+    -fx-label-padding: 0;
+    -fx-background-color: WHITE;
+}
+
+.product-setting-list .list-cell:selected {
+    -fx-label-padding: 0;
+}
+
+.product-setting-list .list-cell:empty {
     -fx-padding: 0;
     -fx-label-padding: 0;
     -fx-background-color: WHITE;

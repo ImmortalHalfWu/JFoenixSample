@@ -22,7 +22,7 @@
         <center>
             <ListView
                 fx:id="productListView"
-                style="-fx-text-fill:WHITE;"
+                style="-fx-text-fill:#eeeeee;"
             />
         </center>
 
