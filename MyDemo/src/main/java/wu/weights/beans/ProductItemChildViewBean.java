@@ -23,7 +23,7 @@ public class ProductItemChildViewBean extends BaseViewBean {
         Object tag, String imageUrl, String productName, String time, String stateString, String stateColor, String oldPrice, String nowPrice, String profitPrice
     ) {
         return new ProductItemChildViewBean(
-            "", imageUrl, productName, time, stateString, stateColor, oldPrice, nowPrice, profitPrice
+            tag, imageUrl, productName, time, stateString, stateColor, oldPrice, nowPrice, profitPrice
         );
     }
 

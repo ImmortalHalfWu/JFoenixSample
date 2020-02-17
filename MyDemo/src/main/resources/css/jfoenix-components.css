@@ -449,3 +449,41 @@
     -fx-label-padding: 0;
     -fx-background-color: WHITE;
 }
+
+
+
+.dialog-device-list {
+    -fx-padding: 0;
+    -fx-label-padding: 0;
+    -fx-background-insets: 0.0;
+}
+
+.dialog-device-list .list-cell {
+    -fx-padding: 0;
+    -fx-label-padding: 0;
+}
+.dialog-device-list .list-cell:even {
+    -fx-padding: 0;
+    -fx-label-padding: 0;
+    -fx-background-color: WHITE;
+    -fx-start-margin: 0;
+    -fx-end-margin: 0;
+}
+
+.dialog-device-list .list-cell:odd {
+    -fx-padding: 0;
+    -fx-label-padding: 0;
+    -fx-background-color: WHITE;
+}
+
+.dialog-device-list .list-cell:selected {
+    -fx-padding: 0;
+    -fx-label-padding: 0;
+    -fx-background-color: WHITE;
+}
+
+.dialog-device-list .list-cell:empty {
+    -fx-padding: 0;
+    -fx-label-padding: 0;
+    -fx-background-color: WHITE;
+}

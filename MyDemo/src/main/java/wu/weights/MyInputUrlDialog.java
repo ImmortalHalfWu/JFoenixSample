@@ -1,6 +1,9 @@
 package wu.weights;
 
-import com.jfoenix.controls.*;
+import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXDialog;
+import com.jfoenix.controls.JFXDialogLayout;
+import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.validation.base.ValidatorBase;
 import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
@@ -29,8 +32,9 @@ public class MyInputUrlDialog {
         });
 
 
+//        Button
         JFXButton button = new JFXButton("  解析  ");
-        button.setStyle("-fx-text-fill: #5264ae");
+        button.setStyle("-fx-text-fill: #15a7f4");
         button.setOnAction(event -> {
             try {
                 if (callBack == null || callBack.filter(textField.getText())) {
@@ -50,7 +54,7 @@ public class MyInputUrlDialog {
 
 
         dialog.setContent(jfxDialogLayout);
-        dialog.setTransitionType(JFXDialog.DialogTransition.CENTER);
+        dialog.setTransitionType(JFXDialog.DialogTransition.NONE);
         dialog.show(root);
 
     }

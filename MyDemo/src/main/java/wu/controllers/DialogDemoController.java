@@ -10,12 +10,16 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.layout.StackPane;
-import wu.weights.MProductSettingView;
+import wu.weights.MyDeviceListDialog;
 import wu.weights.MyInputUrlDialog;
-import wu.weights.MyProductForUrlDialog;
+import wu.weights.MyProductSettingUrlDialog;
+import wu.weights.MyProductSettingView;
+import wu.weights.beans.DeviceItemViewBean;
 import wu.weights.beans.ProductSettingViewBean;
 
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 @ViewController(value = "/fxml/DialogDemo.fxml", title = "我的DialogDemo")
@@ -47,9 +51,27 @@ public class DialogDemoController implements Initializable {
                     @Override
                     public void sucClick(String text) {
 
-                        MyProductForUrlDialog.showDialogTest(root, new MProductSettingView.ProductSettingViewListener() {
+                        MyProductSettingUrlDialog.showDialogTest(root, new MyProductSettingView.ProductSettingViewListener() {
                             @Override
                             public void sendClick(ProductSettingViewBean dataBean) {
+
+                                List<DeviceItemViewBean> data = new ArrayList<>();
+                                for (int i = 0; i < 10; i++) {
+                                    data.add(
+                                        DeviceItemViewBean.createConnectLoginBean("", i + "奥术大师多")
+                                    );
+                                }
+
+                                MyDeviceListDialog.showDeviceListDialog(root, data, new MyDeviceListDialog.MyDeviceListDialogListener() {
+                                    @Override
+                                    public void clickSend(List<DeviceItemViewBean> choiceDeviceItemBean) {
+                                        System.out.println(choiceDeviceItemBean);
+                                    }
+                                });
+                            }
+
+                            @Override
+                            public void cancelClick(ProductSettingViewBean dataBean) {
 
                             }
 

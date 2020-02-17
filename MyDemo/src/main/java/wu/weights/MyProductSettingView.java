@@ -9,7 +9,6 @@ import com.jfoenix.validation.base.ValidatorBase;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
-import javafx.geometry.NodeOrientation;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
@@ -29,14 +28,14 @@ import wu.weights.beans.ProductSettingViewBean;
 import java.util.HashSet;
 
 
-public class MProductSettingView extends StackPane {
+public class MyProductSettingView extends StackPane {
 
     private final ProductSettingViewBean dataBean;
     private ProductSettingViewListener listener;
 
     private HashSet<JFXTextField> jfxTextFields;
 
-    public MProductSettingView(ProductSettingViewBean dataBean, ProductSettingViewListener listener) {
+    public MyProductSettingView(ProductSettingViewBean dataBean, ProductSettingViewListener listener) {
         super();
 
         this.dataBean = dataBean;
@@ -350,19 +349,17 @@ public class MProductSettingView extends StackPane {
             </JFXButton>
         </HBox>
          */
-        HBox btBox = new HBox(26);
-        btBox.setNodeOrientation(NodeOrientation.RIGHT_TO_LEFT);
-        btBox.setAlignment(Pos.CENTER_LEFT);
+        StackPane btBox = new StackPane();
         VBox.setMargin(btBox, new Insets(20, 0, 0, 0));
 
-        JFXButton sendBt = new JFXButton("发布");
+        JFXButton sendBt = new JFXButton("完成");
+        StackPane.setAlignment(sendBt, Pos.CENTER_RIGHT);
         sendBt.setAlignment(Pos.CENTER);
         sendBt.setStyle("-fx-text-fill:#15a7f4;" +
             "                        -fx-padding: 0;" +
             "                        -fx-pref-width: 40;" +
             "                        -fx-pref-height: 20;" +
             "                        -fx-font-size:20;");
-
         sendBt.setOnAction(event -> {
             for (JFXTextField textField : jfxTextFields) {
                 if (!textField.validate()) {
@@ -380,14 +377,42 @@ public class MProductSettingView extends StackPane {
         btBox.getChildren().add(sendBt);
 
 
-        JFXButton errBt = new JFXButton("信息错误?");
+        JFXButton cancelBt = new JFXButton("取消");
+        StackPane.setAlignment(cancelBt, Pos.TOP_RIGHT);
+        StackPane.setMargin(cancelBt, new Insets(0, 66, 0, 0));
+        cancelBt.setAlignment(Pos.CENTER);
+        cancelBt.setStyle("-fx-text-fill: #999999;" +
+            "                        -fx-padding: 0;" +
+            "                        -fx-pref-width: 40;" +
+            "                        -fx-pref-height: 20;" +
+            "                        -fx-font-size: 20;");
+
+        cancelBt.setOnAction(event -> {
+            if (listener != null) {
+                try {
+                    listener.cancelClick(dataBean);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        btBox.getChildren().add(cancelBt);
+
+
+        JFXButton errBt = new JFXButton("信息有误?");
         errBt.setAlignment(Pos.CENTER);
+        StackPane.setAlignment(errBt, Pos.CENTER_LEFT);
         errBt.setStyle("-fx-text-fill:#999999;" +
             "                        -fx-padding: 0;" +
             "                          -fx-pref-width: 63; -fx-pref-height: 15");
         errBt.setOnAction(event -> {
+            errBt.setText("感谢反馈");
             if (listener != null) {
-                listener.errClick(dataBean);
+                try {
+                    listener.errClick(dataBean);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         });
         btBox.getChildren().add(errBt);
@@ -426,7 +451,7 @@ public class MProductSettingView extends StackPane {
             "-fx-background-radius: 10; -jfx-toggle-color: #15a7f4; ");
         jfxToggleNode.setPadding(new Insets(3));
         jfxToggleNode.setGraphic(productImage);
-        jfxToggleNode.setSelected(true);
+//        jfxToggleNode.setSelected(true);
 
         StackPane stackPane = new StackPane();
         stackPane.setAlignment(Pos.CENTER);
@@ -440,12 +465,11 @@ public class MProductSettingView extends StackPane {
 
         Label label = new Label(tagName);
         label.setAlignment(Pos.CENTER);
-        label.setStyle(" -fx-text-fill: #15a7f4");
+        label.setStyle(" -fx-text-fill: #999999");
 
         JFXToggleNode jfxToggleNode = new JFXToggleNode();
         jfxToggleNode.getStyleClass().add("toggle-tag");
         jfxToggleNode.setStyle("-fx-pref-width: -Infinity; padding: 0;");
-        jfxToggleNode.setSelected(true);
 
         jfxToggleNode.setOnMousePressed(event -> {
             if (!jfxToggleNode.isSelected()) {
@@ -506,14 +530,9 @@ public class MProductSettingView extends StackPane {
         return label;
     }
 
-    public MProductSettingView setListener(ProductSettingViewListener listener) {
-        this.listener = listener;
-        return this;
-    }
-
-
     public interface ProductSettingViewListener {
         void sendClick(ProductSettingViewBean dataBean);
+        void cancelClick(ProductSettingViewBean dataBean);
         void errClick(ProductSettingViewBean dataBean);
     }
 

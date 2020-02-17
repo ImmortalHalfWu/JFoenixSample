@@ -6,9 +6,9 @@ import wu.weights.beans.ProductSettingViewBean;
 
 import java.util.ArrayList;
 
-public class MyProductForUrlDialog {
+public class MyProductSettingUrlDialog {
 
-    public static void showDialogTest(StackPane root, MProductSettingView.ProductSettingViewListener listener) {
+    public static void showDialogTest(StackPane root, MyProductSettingView.ProductSettingViewListener listener) {
         if (root == null) {
             return;
         }
@@ -32,7 +32,7 @@ public class MyProductForUrlDialog {
     }
 
 
-    public static void showDialog(StackPane root, ProductSettingViewBean bean, MProductSettingView.ProductSettingViewListener listener) {
+    public static void showDialog(StackPane root, ProductSettingViewBean bean, MyProductSettingView.ProductSettingViewListener listener) {
 
         try {
             if (root == null) {
@@ -41,10 +41,15 @@ public class MyProductForUrlDialog {
 
             JFXDialog dialog = new JFXDialog();
 
-            StackPane dialogRoot = new MProductSettingView(bean, new MProductSettingView.ProductSettingViewListener() {
+            StackPane dialogRoot = new MyProductSettingView(bean, new MyProductSettingView.ProductSettingViewListener() {
                 @Override
                 public void sendClick(ProductSettingViewBean dataBean) {
                     listener.sendClick(dataBean);
+                    dialog.close();
+                }
+
+                @Override
+                public void cancelClick(ProductSettingViewBean dataBean) {
                     dialog.close();
                 }
 
@@ -55,7 +60,8 @@ public class MyProductForUrlDialog {
             });
 
             dialog.setContent(dialogRoot);
-            dialog.setTransitionType(JFXDialog.DialogTransition.CENTER);
+            dialog.setTransitionType(JFXDialog.DialogTransition.NONE);
+            dialog.setOverlayClose(false);
             dialog.show(root);
         } catch (Exception e) {
             e.printStackTrace();
