@@ -1,6 +1,6 @@
 include 'jfoenix'
 include 'demo'
 
-rootProject.name = 'jfoenix-root'
+//rootProject.name = 'jfoenix-master'
 include 'MyDemo'
 
