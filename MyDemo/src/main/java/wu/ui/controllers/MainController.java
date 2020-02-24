@@ -16,6 +16,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
+import wu.device.division.UIUserInfoBean;
 import wu.ui.adapters.BaseListViewAdapter;
 import wu.ui.events.DeviceListItemClickEvent;
 import wu.ui.events.ProductItemClickEvent;
@@ -26,6 +27,7 @@ import wu.ui.models.beans.CacheIdleFishUserConfigBean;
 import wu.ui.models.beans.UIDevAppProductBindBean;
 import wu.ui.models.interfaces.MainModelListener;
 import wu.ui.utils.MEventBus;
+import wu.ui.utils.ThreadUtil;
 import wu.ui.weights.DeviceListItemView;
 import wu.ui.weights.ProductListItemView;
 import wu.ui.weights.beans.DeviceItemViewBean;
@@ -75,7 +77,7 @@ public final class MainController implements MainModelListener {
         deviceListView.setCellFactory(new BaseListViewAdapter<>());
 //        deviceListView.setItems(deviceViews);
 //        deviceViews.add(new DeviceListItemView(DeviceItemViewBean.createConnectLoginBean("", "朴素不朴素", "")));
-//        deviceViews.add(new DeviceListItemView(DeviceItemViewBean.createConnectUnLoginBean("", "")));
+//        deviceViews.add(new DeviceListItemView(DeviceItemViewBean.createConnectUnLogoutBean("", "")));
 //        deviceViews.add(new DeviceListItemView(DeviceItemViewBean.createDisconnectLoginBean("", "朴素不朴素")));
 //        deviceListView.setItems(deviceViews);
 //        long s = System.currentTimeMillis();
@@ -122,7 +124,13 @@ public final class MainController implements MainModelListener {
         productListView.setStyle("-fx-background-color: #eeeeee");
         productListView.setCellFactory(new BaseListViewAdapter<>());
 //        productListView.setItems(productViews);
-
+        ThreadUtil.runInMain(new Runnable() {
+            @Override
+            public void run() {
+                deviceConnectLogout(null,
+                    UIDevAppProductBindBean.create(UIUserInfoBean.createLogout(), null));
+            }
+        }, 5000);
     }
 
     private void setBtIco(JFXButton bt, String icoName) throws Exception {
@@ -201,12 +209,41 @@ public final class MainController implements MainModelListener {
 
     @Override
     public void deviceConnectLogout(List<UIDevAppProductBindBean> devAppProductBindBeans, UIDevAppProductBindBean bean) {
-//        todo 有设备连接， 未登录闲鱼用户
+//        String deviceId = bean.getDevice().getDeviceId();
+//        final boolean[] isFind = {false};
+////        todo 有设备连接， 未登录闲鱼用户
+//        deviceListView.getItems().replaceAll(itemView -> {
+//            if (!itemView.getDataBean().getDeviceId().equals(deviceId)) {
+//                return itemView;
+//            }
+//            isFind[0] = true;
+//            return new DeviceListItemView(BeanUtil.deviceItemViewBeanConvertToConnectLogout(itemView));
+//        });
+//
+//        if (isFind[0]) {
+//            return;
+//        }
+//
+//        deviceListView.getItems().add(
+//            new DeviceListItemView(
+//                DeviceItemViewBean.createConnectUnLogoutBean(bean, bean.getUserName().getName())
+//            )
+//        );
     }
 
     @Override
     public void deviceConnectLogin(List<UIDevAppProductBindBean> devAppProductBindBeans, UIDevAppProductBindBean bean) {
 //        todo 有设备连接， 并登录了闲鱼用户
+//        String deviceId = bean.getDevice().getDeviceId();
+//        final boolean[] isFind = {false};
+//        deviceListView.getItems().replaceAll(itemView -> {
+//            if (!itemView.getDataBean().getDeviceId().equals(deviceId)) {
+//                return itemView;
+//            }
+//            isFind[0] = true;
+//            return new DeviceListItemView(BeanUtil.deviceItemViewBeanConvertToConnectLogin(itemView, bean.getUserName().getName()));
+//        });
+//        deviceListView.getItems().
     }
 
     @Override

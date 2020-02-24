@@ -56,6 +56,25 @@ class UserInfoManager {
         }
         // 读取本地文件转bean
         this.idleFishUserInfoBean = userConfigTemp;
+
+//        List<CacheIdleFishUserConfigBean.CacheIdleFishUserInfoBean> userInfoBeans = new ArrayList<>();
+//        for (int i = 0; i < 10; i++) {
+//            List<CacheIdleFishUserConfigBean.CacheIdleFishProductBean> productBeans = new ArrayList<>();
+//            for (int j = 0; j < i * 5 + 1; j++) {
+//                productBeans.add(
+//                    new CacheIdleFishUserConfigBean.CacheIdleFishProductBean(
+//                        "url",
+//                        "http://img14.360buyimg.com/imgzone/jfs/t1/91657/8/11629/198826/5e37e559E5ee5ce2a/cfb8d362d9d01210.jpg?imageMogr2/strip/format/jpg",
+//                        "name" + i + j, "2020/02/01", (i+j) % 2 == 0 ? "发布成功" : "发布失败",
+//                        "123.1", "123", "0.1", new ArrayList<>()
+//                    )
+//                );
+//            }
+//            userInfoBeans.add(new CacheIdleFishUserConfigBean.CacheIdleFishUserInfoBean(
+//                "user" + i, productBeans
+//            ));
+//        }
+//        this.idleFishUserInfoBean = new CacheIdleFishUserConfigBean(userInfoBeans);
     }
 
     List<CacheIdleFishUserConfigBean.CacheIdleFishUserInfoBean> getUserInfos() {

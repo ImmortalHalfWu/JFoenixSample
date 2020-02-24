@@ -8,20 +8,21 @@ import java.awt.*;
 
 public class NullUiAndroidDevice implements IUiAndroidDevice {
 
-    private static NullUiAndroidDevice instance = new NullUiAndroidDevice();
-
     public static NullUiAndroidDevice getInstance() {
-        return instance;
+        return new NullUiAndroidDevice();
     }
 
-    private NullUiAndroidDevice() {}
+    private NullUiAndroidDevice() {
+        deviceId = System.currentTimeMillis() + "";
+    }
 
     private static final String TAG = "NullUiAndroidDevice";
+    private final String deviceId;
 
     @Override
     public String getDeviceId() {
         LogUtil.e(TAG, "NullUiAndroidDevice getDeviceId");
-        return "";
+        return deviceId;
     }
 
     @Override

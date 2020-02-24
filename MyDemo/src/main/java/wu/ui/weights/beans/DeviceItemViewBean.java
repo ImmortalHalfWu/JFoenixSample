@@ -23,7 +23,7 @@ public class DeviceItemViewBean extends BaseViewBean {
         );
     }
 
-    public static DeviceItemViewBean createConnectUnLoginBean(
+    public static DeviceItemViewBean createConnectUnLogoutBean(
         Object tag, String deviceId
     ) {
         return new DeviceItemViewBean(

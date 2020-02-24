@@ -39,7 +39,7 @@ public class MyListViewDemo2 extends Application {
         long s = System.currentTimeMillis();
         objects.add(new DeviceListItemView(DeviceItemViewBean.createConnectLoginBean("", "朴素不朴素", "")));
         objects.add(new DeviceListItemView(DeviceItemViewBean.createDisconnectLoginBean("", "朴素不朴素")));
-        objects.add(new DeviceListItemView(DeviceItemViewBean.createConnectUnLoginBean("", "")));
+        objects.add(new DeviceListItemView(DeviceItemViewBean.createConnectUnLogoutBean("", "")));
 
         for (int i = 0; i < 30; i++) {
 //            objects.add(FXMLLoader.load(getClass().getResource("/fxml/DeviceListItem.fxml")));

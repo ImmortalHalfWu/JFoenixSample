@@ -57,9 +57,9 @@ public class BeanUtil {
      */
     public static DeviceItemViewBean deviceItemViewBeanConvertToConnectLogout(DeviceListItemView itemView) {
         if (itemView == null || itemView.getDataBean() == null) {
-            return DeviceItemViewBean.createConnectUnLoginBean("", "");
+            return DeviceItemViewBean.createConnectUnLogoutBean("", "");
         }
-        return DeviceItemViewBean.createConnectUnLoginBean(
+        return DeviceItemViewBean.createConnectUnLogoutBean(
                 itemView.getDataBean().getTag(),
                 itemView.getDataBean().getDeviceId());
     }
