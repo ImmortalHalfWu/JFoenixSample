@@ -1,5 +1,6 @@
 package wu.ui.utils;
 
+import com.sun.istack.internal.NotNull;
 import com.sun.istack.internal.Nullable;
 import immortal.half.wu.FileUtils;
 import wu.ui.models.beans.CacheIdleFishUserInfoBean;
@@ -48,12 +49,16 @@ public class BeanUtil {
     /**
      * 转换deviceItem状态 连接已登录
      */
-    public static DeviceItemViewBean deviceItemViewBeanConvertToConnectLogin(DeviceListItemView itemView, @Nullable String userName) {
+    public static DeviceItemViewBean deviceItemViewBeanConvertToConnectLogin(
+        DeviceListItemView itemView,
+        @Nullable String userName,
+        @NotNull Object newTag
+    ) {
         if (itemView == null || itemView.getDataBean() == null) {
             return DeviceItemViewBean.createConnectLoginBean("", "null", "");
         }
         return DeviceItemViewBean.createConnectLoginBean(
-                itemView.getDataBean().getTag(),
+                newTag,
                 FileUtils.isEmpty(userName) ? itemView.getDataBean().getUserNameText() : userName,
                 itemView.getDataBean().getDeviceId());
     }
@@ -61,24 +66,31 @@ public class BeanUtil {
     /**
      * 转换deviceItem状态 连接未登录
      */
-    public static DeviceItemViewBean deviceItemViewBeanConvertToConnectLogout(DeviceListItemView itemView) {
+    public static DeviceItemViewBean deviceItemViewBeanConvertToConnectLogout(
+        DeviceListItemView itemView,
+        @NotNull Object newTag
+    ) {
         if (itemView == null || itemView.getDataBean() == null) {
             return DeviceItemViewBean.createConnectUnLogoutBean("", "");
         }
         return DeviceItemViewBean.createConnectUnLogoutBean(
-                itemView.getDataBean().getTag(),
+                newTag,
                 itemView.getDataBean().getDeviceId());
     }
 
     /**
      * 转换deviceItem状态 未连接已登录
      */
-    public static DeviceItemViewBean deviceItemViewBeanConvertToDisconnectLogin(DeviceListItemView itemView, @Nullable String userName) {
+    public static DeviceItemViewBean deviceItemViewBeanConvertToDisconnectLogin(
+        DeviceListItemView itemView,
+        @Nullable String userName,
+        @NotNull Object newTag
+    ) {
         if (itemView == null || itemView.getDataBean() == null) {
             return DeviceItemViewBean.createDisconnectLoginBean("", "null");
         }
         return DeviceItemViewBean.createDisconnectLoginBean(
-                itemView.getDataBean().getTag(),
+                newTag,
                 FileUtils.isEmpty(userName) ? itemView.getDataBean().getUserNameText() : userName
         );
     }

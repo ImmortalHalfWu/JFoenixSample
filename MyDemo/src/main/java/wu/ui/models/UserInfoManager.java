@@ -1,5 +1,6 @@
 package wu.ui.models;
 
+import com.google.gson.reflect.TypeToken;
 import com.sun.istack.internal.Nullable;
 import immortal.half.wu.FileUtils;
 import immortal.half.wu.JsonUtil;
@@ -8,7 +9,9 @@ import wu.ui.models.beans.CacheIdleFishUserInfoBean;
 import wu.ui.utils.ThreadUtil;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 闲鱼用户数据缓存工具类
@@ -36,36 +39,70 @@ class UserInfoManager {
     /**
      * 缓存bean
      */
-    private final List<CacheIdleFishUserInfoBean> idleFishUserInfoBean;
+    private List<CacheIdleFishUserInfoBean> idleFishUserInfoBean;
+
+    private final Map<String, List<CacheIdleFishUserInfoBean.CacheIdleFishProductBean>> userInfoMap;
 
     private UserInfoManager() {
         // 初始化文件
         FileUtils.mkFile(PATH_CACHE_FILE);
         // 读取本地文件转bean
-//        this.idleFishUserInfoBean = userConfigTemp;
-
-        List<CacheIdleFishUserInfoBean> userInfoBeans = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            List<CacheIdleFishUserInfoBean.CacheIdleFishProductBean> productBeans = new ArrayList<>();
-            for (int j = 0; j < i * 5 + 1; j++) {
-                productBeans.add(
-                    new CacheIdleFishUserInfoBean.CacheIdleFishProductBean(
-                        "url",
-                        "http://img14.360buyimg.com/imgzone/jfs/t1/91657/8/11629/198826/5e37e559E5ee5ce2a/cfb8d362d9d01210.jpg?imageMogr2/strip/format/jpg",
-                        "name" + i + j, "2020/02/01", (i+j) % 2 == 0 ? "发布成功" : "发布失败",
-                        "123.1", "123", "0.1", new ArrayList<>()
-                    )
-                );
-            }
-            userInfoBeans.add(new CacheIdleFishUserInfoBean(
-                "user" + i, productBeans
-            ));
+        try {
+            this.idleFishUserInfoBean = JsonUtil.fromJson(FileUtils.readFile(PATH_CACHE_FILE), new TypeToken<List<CacheIdleFishUserInfoBean>>(){});
+        } catch (Exception e) {
+            LogUtil.e(TAG, e, e);
         }
-        this.idleFishUserInfoBean = userInfoBeans;
+
+        if (idleFishUserInfoBean == null) {
+            this.idleFishUserInfoBean = new ArrayList<>();
+        }
+
+//        List<CacheIdleFishUserInfoBean> userInfoBeans = new ArrayList<>();
+//        for (int i = 0; i < 10; i++) {
+//            List<CacheIdleFishUserInfoBean.CacheIdleFishProductBean> productBeans = new ArrayList<>();
+//            for (int j = 0; j < i * 5 + 1; j++) {
+//                productBeans.add(
+//                    new CacheIdleFishUserInfoBean.CacheIdleFishProductBean(
+//                        "url",
+//                        "http://imgs14.360buyimg.com/imgzone/jfs/t1/91657/8/11629/198826/5e37e559E5ee5ce2a/cfb8d362d9d01210.jpg?imageMogr2/strip/format/jpg",
+//                        "name" + i + j, "2020/02/01", (i+j) % 2 == 0 ? "发布成功" : "发布失败",
+//                        "123.1", "123", "0.1", new ArrayList<>()
+//                    )
+//                );
+//            }
+//            userInfoBeans.add(new CacheIdleFishUserInfoBean(
+//                "user" + i, productBeans
+//            ));
+//        }
+//        this.idleFishUserInfoBean = userInfoBeans;
+//        saveConfigFile.run();
+
+        this.userInfoMap = new HashMap<>();
+        try {
+            idleFishUserInfoBean.forEach(cacheIdleFishUserInfoBean ->
+                userInfoMap.put(
+                cacheIdleFishUserInfoBean.getUserName(),
+                cacheIdleFishUserInfoBean.getIdleFishProductModelBeans()
+            ));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     List<CacheIdleFishUserInfoBean> getUserInfos() {
         return idleFishUserInfoBean;
+    }
+
+    List<String> getAllUserName() {
+        return new ArrayList<>(userInfoMap.keySet());
+    }
+
+    boolean isNewUser(String userName) {
+        return !userInfoMap.containsKey(userName);
+    }
+
+    List<CacheIdleFishUserInfoBean.CacheIdleFishProductBean> getProductForUserName(String userName) {
+        return userInfoMap.get(userName);
     }
 
     /**

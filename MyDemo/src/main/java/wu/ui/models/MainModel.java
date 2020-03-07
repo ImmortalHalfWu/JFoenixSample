@@ -32,7 +32,6 @@ public class MainModel implements DeviceAppListener {
 
         ThreadUtil.runInWork(() -> {
             userInfoManager = UserInfoManager.getInstance();
-
             userInfoManager.getUserInfos().forEach(new Consumer<CacheIdleFishUserInfoBean>() {
                 @Override
                 public void accept(CacheIdleFishUserInfoBean userInfoBean) {
@@ -44,11 +43,30 @@ public class MainModel implements DeviceAppListener {
                     );
                 }
             });
-
             listener.loadUserConfigOver(devAppProductBindBeans);
 //            DeviceManager.getInstance().setListener(MainModel.this); todo 注释
         });
 
+    }
+
+    public List<CacheIdleFishUserInfoBean> getUserInfoCache() {
+        return userInfoManager.getUserInfos();
+    }
+
+    public List<String> getAllUserName() {
+        return userInfoManager.getAllUserName();
+    }
+
+    public boolean isNewUser(String userName) {
+        return userInfoManager.isNewUser(userName);
+    }
+
+    public List<CacheIdleFishUserInfoBean.CacheIdleFishProductBean> getProductForUserName(String userName) {
+        return userInfoManager.getProductForUserName(userName);
+    }
+
+    public void addUser(String userName) {
+        userInfoManager.addUser(userName);
     }
 
     @Override

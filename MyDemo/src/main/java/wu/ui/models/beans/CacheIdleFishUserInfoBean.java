@@ -5,48 +5,42 @@ import java.util.Objects;
 
 public class CacheIdleFishUserInfoBean {
 
-        private final String userName;
-        private final List<CacheIdleFishProductBean> idleFishProductModelBeans;
+    private String userName;
+    private List<CacheIdleFishProductBean> idleFishProductModelBeans;
 
-        public CacheIdleFishUserInfoBean(String userName, List<CacheIdleFishProductBean> idleFishProductModelBeans) {
-            this.userName = userName;
-            this.idleFishProductModelBeans = idleFishProductModelBeans;
-        }
+    public CacheIdleFishUserInfoBean(String userName, List<CacheIdleFishProductBean> idleFishProductModelBeans) {
+        this.userName = userName;
+        this.idleFishProductModelBeans = idleFishProductModelBeans;
+    }
 
-        public String getUserName() {
-            return userName;
-        }
+    public String getUserName() {
+        return userName;
+    }
 
-        public List<CacheIdleFishProductBean> getIdleFishProductModelBeans() {
-            return idleFishProductModelBeans;
-        }
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
 
-        @Override
-        public boolean equals(Object o) {
-            if (this == o) return true;
-            if (!(o instanceof CacheIdleFishUserInfoBean)) return false;
-            CacheIdleFishUserInfoBean that = (CacheIdleFishUserInfoBean) o;
-            return userName.equals(that.userName);
-        }
+    public List<CacheIdleFishProductBean> getIdleFishProductModelBeans() {
+        return idleFishProductModelBeans;
+    }
 
-        @Override
-        public int hashCode() {
-            return Objects.hash(userName);
-        }
-
+    public void setIdleFishProductModelBeans(List<CacheIdleFishProductBean> idleFishProductModelBeans) {
+        this.idleFishProductModelBeans = idleFishProductModelBeans;
+    }
 
 
     public static class CacheIdleFishProductBean {
 
-        private final String productUrl;
-        private final String imageUrl;
-        private final String productName;
-        private final String time;
-        private final String stateString;
-        private final String oldPrice;
-        private final String nowPrice;
-        private final String profitPrice;
-        private final List<String> tags;
+        private String productUrl;
+        private String imageUrl;
+        private String productName;
+        private String time;
+        private String stateString;
+        private String oldPrice;
+        private String nowPrice;
+        private String profitPrice;
+        private List<String> tags;
 
         public CacheIdleFishProductBean(String productUrl, String imageUrl, String productName, String time, String stateString, String oldPrice, String nowPrice, String profitPrice, List<String> tags) {
             this.productUrl = productUrl;
@@ -64,34 +58,69 @@ public class CacheIdleFishUserInfoBean {
             return productUrl;
         }
 
+        public void setProductUrl(String productUrl) {
+            this.productUrl = productUrl;
+        }
+
         public String getImageUrl() {
             return imageUrl;
+        }
+
+        public void setImageUrl(String imageUrl) {
+            this.imageUrl = imageUrl;
         }
 
         public String getProductName() {
             return productName;
         }
 
+        public void setProductName(String productName) {
+            this.productName = productName;
+        }
+
         public String getTime() {
             return time;
+        }
+
+        public void setTime(String time) {
+            this.time = time;
         }
 
         public String getStateString() {
             return stateString;
         }
 
+        public void setStateString(String stateString) {
+            this.stateString = stateString;
+        }
+
         public String getOldPrice() {
             return oldPrice;
+        }
+
+        public void setOldPrice(String oldPrice) {
+            this.oldPrice = oldPrice;
         }
 
         public String getNowPrice() {
             return nowPrice;
         }
 
+        public void setNowPrice(String nowPrice) {
+            this.nowPrice = nowPrice;
+        }
+
         public String getProfitPrice() {
             return profitPrice;
         }
 
+        public void setProfitPrice(String profitPrice) {
+            this.profitPrice = profitPrice;
+        }
+
+        public void setTags(List<String> tags) {
+            this.tags = tags;
+        }
         @Override
         public String toString() {
             return "CacheIdleFishProductBean{" +

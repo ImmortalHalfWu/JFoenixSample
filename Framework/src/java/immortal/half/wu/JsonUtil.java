@@ -32,16 +32,15 @@ public class JsonUtil {
         return null;
     }
 
-    public static <T> T fromJson(String jsonString) {
-        TypeToken<T> tClass = new TypeToken<T>(){};
+    public static <T> T fromJson(String jsonString, TypeToken<T> token) {
         try {
-            return getGson().fromJson(jsonString, tClass.getType());
+            return getGson().fromJson(jsonString, token.getType());
         } catch (Exception e) {
             e.printStackTrace();
         }
 
         try {
-            return (T)tClass.getRawType().newInstance();
+            return (T)token.getRawType().newInstance();
         } catch (@NotNull InstantiationException | ClassCastException | IllegalAccessException e) {
             e.printStackTrace();
         }

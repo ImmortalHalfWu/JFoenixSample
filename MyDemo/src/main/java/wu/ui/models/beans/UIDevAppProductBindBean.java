@@ -20,10 +20,36 @@ public class UIDevAppProductBindBean {
         List<CacheIdleFishUserInfoBean.CacheIdleFishProductBean> products) {
 
         return new UIDevAppProductBindBean(
-                UIUserInfoBean.create(userName, false),
-                NullUiAndroidDevice.getInstance(),
-                new NullUiApp<>(),
-                products);
+            UIUserInfoBean.create(userName, false),
+            NullUiAndroidDevice.getInstance(),
+            new NullUiApp<>(),
+            products);
+    }
+
+    public static UIDevAppProductBindBean create(
+        String deviceId,
+        String userName,
+        List<CacheIdleFishUserInfoBean.CacheIdleFishProductBean> products) {
+
+        return new UIDevAppProductBindBean(
+            UIUserInfoBean.create(userName, false),
+            NullUiAndroidDevice.getInstance(deviceId),
+            new NullUiApp<>(),
+            products);
+    }
+
+
+    public static UIDevAppProductBindBean create(
+        String deviceId,
+        String userName,
+        boolean isLogin,
+        List<CacheIdleFishUserInfoBean.CacheIdleFishProductBean> products) {
+
+        return new UIDevAppProductBindBean(
+            UIUserInfoBean.create(userName, isLogin),
+            NullUiAndroidDevice.getInstance(deviceId),
+            new NullUiApp<>(),
+            products);
     }
 
     public static UIDevAppProductBindBean create(IUiAndroidDevice androidDevice,
