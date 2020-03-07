@@ -1,6 +1,7 @@
 package immortal.half.wu;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.sun.istack.internal.NotNull;
 import com.sun.istack.internal.Nullable;
 
@@ -8,10 +9,7 @@ import java.beans.BeanInfo;
 import java.beans.IntrospectionException;
 import java.beans.Introspector;
 import java.beans.PropertyDescriptor;
-import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.lang.reflect.Modifier;
+import java.lang.reflect.*;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -28,6 +26,23 @@ public class JsonUtil {
         try {
             return tClass.newInstance();
         } catch (@NotNull InstantiationException | IllegalAccessException e) {
+            e.printStackTrace();
+        }
+
+        return null;
+    }
+
+    public static <T> T fromJson(String jsonString) {
+        TypeToken<T> tClass = new TypeToken<T>(){};
+        try {
+            return getGson().fromJson(jsonString, tClass.getType());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        try {
+            return (T)tClass.getRawType().newInstance();
+        } catch (@NotNull InstantiationException | ClassCastException | IllegalAccessException e) {
             e.printStackTrace();
         }
 

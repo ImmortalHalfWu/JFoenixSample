@@ -17,12 +17,9 @@ import java.util.ArrayList;
  */
 public class UiFishIdleAppImpl implements IUiApp<UIIdleFishProductBean, UIUserInfoBean> {
 
-    private UIUserInfoBean userInfoBean;
-    private final IAndroidDevice androidDevice;
     private final IApp<IdleFishProductBean, UserInfoBean> fishIdleApp;
 
     public UiFishIdleAppImpl(@NotNull IAndroidDevice androidDevice) {
-        this.androidDevice = androidDevice;
         this.fishIdleApp = IdleFishAppFactory.createFishIdleApp(androidDevice.getDeviceId(), androidDevice.getExecutorService());
     }
 
@@ -53,35 +50,27 @@ public class UiFishIdleAppImpl implements IUiApp<UIIdleFishProductBean, UIUserIn
 
 
     public void getUserName(IUiAppCallBack<UIUserInfoBean> callBack) {
-        if (userInfoBean != null && userInfoBean.getName() != null && !userInfoBean.isLogout()) {
-            callBack.onComplete(userInfoBean);
-        }
         fishIdleApp.isLogin(new MAppCallBack<>(new IUiAppCallBack<Boolean>() {
             @Override
             public void onError(Exception e) {
                 callBack.onError(e);
-                userInfoBean = null;
-                userInfoBean = UIUserInfoBean.createLogout();
             }
 
             @Override
             public void onComplete(Boolean result) {
                 if (!result) {
-                    userInfoBean = UIUserInfoBean.createLogout();
                     callBack.onComplete(UIUserInfoBean.createLogout());
                     return;
                 }
                 fishIdleApp.getUserName(new IAppCallBack<UserInfoBean>() {
                     @Override
                     public void onError(Exception e) {
-                        userInfoBean = UIUserInfoBean.createLogout();
                         callBack.onError(e);
                     }
 
                     @Override
                     public void onComplete(UserInfoBean result) {
-                        userInfoBean = new UIUserInfoBean(result, true);
-                        callBack.onComplete(userInfoBean);
+                        callBack.onComplete(UIUserInfoBean.create(result.getName(), true));
                     }
                 });
             }

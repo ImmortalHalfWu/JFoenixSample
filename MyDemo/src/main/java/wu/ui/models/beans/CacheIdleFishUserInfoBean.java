@@ -3,22 +3,7 @@ package wu.ui.models.beans;
 import java.util.List;
 import java.util.Objects;
 
-public class CacheIdleFishUserConfigBean {
-
-    private final List<CacheIdleFishUserInfoBean> idleFishUserInfoBeans;
-
-    public CacheIdleFishUserConfigBean(List<CacheIdleFishUserInfoBean> idleFishUserInfoBeans) {
-        this.idleFishUserInfoBeans = idleFishUserInfoBeans;
-    }
-
-    public List<CacheIdleFishUserInfoBean> getIdleFishUserInfoBeans() {
-        return idleFishUserInfoBeans;
-    }
-
-
-
-
-    public static class CacheIdleFishUserInfoBean {
+public class CacheIdleFishUserInfoBean {
 
         private final String userName;
         private final List<CacheIdleFishProductBean> idleFishProductModelBeans;
@@ -48,10 +33,6 @@ public class CacheIdleFishUserConfigBean {
         public int hashCode() {
             return Objects.hash(userName);
         }
-    }
-
-
-
 
 
 

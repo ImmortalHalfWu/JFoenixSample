@@ -4,12 +4,11 @@ import com.sun.istack.internal.Nullable;
 import immortal.half.wu.FileUtils;
 import immortal.half.wu.JsonUtil;
 import immortal.half.wu.LogUtil;
-import wu.ui.models.beans.CacheIdleFishUserConfigBean;
+import wu.ui.models.beans.CacheIdleFishUserInfoBean;
 import wu.ui.utils.ThreadUtil;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 /**
  * 闲鱼用户数据缓存工具类
@@ -37,48 +36,36 @@ class UserInfoManager {
     /**
      * 缓存bean
      */
-    private final CacheIdleFishUserConfigBean idleFishUserInfoBean;
-
-    /**
-     * 用户与商品映射表
-     */
-    private Map<CacheIdleFishUserConfigBean.CacheIdleFishUserInfoBean, List<CacheIdleFishUserConfigBean.CacheIdleFishProductBean>> userProductMap;
+    private final List<CacheIdleFishUserInfoBean> idleFishUserInfoBean;
 
     private UserInfoManager() {
         // 初始化文件
         FileUtils.mkFile(PATH_CACHE_FILE);
-
-        CacheIdleFishUserConfigBean userConfigTemp;
-        try {
-            userConfigTemp = JsonUtil.fromJson(CacheIdleFishUserConfigBean.class, FileUtils.readFile(PATH_CACHE_FILE));
-        } catch (Exception e) {
-            userConfigTemp = new CacheIdleFishUserConfigBean(new ArrayList<>());
-        }
         // 读取本地文件转bean
-        this.idleFishUserInfoBean = userConfigTemp;
+//        this.idleFishUserInfoBean = userConfigTemp;
 
-//        List<CacheIdleFishUserConfigBean.CacheIdleFishUserInfoBean> userInfoBeans = new ArrayList<>();
-//        for (int i = 0; i < 10; i++) {
-//            List<CacheIdleFishUserConfigBean.CacheIdleFishProductBean> productBeans = new ArrayList<>();
-//            for (int j = 0; j < i * 5 + 1; j++) {
-//                productBeans.add(
-//                    new CacheIdleFishUserConfigBean.CacheIdleFishProductBean(
-//                        "url",
-//                        "http://img14.360buyimg.com/imgzone/jfs/t1/91657/8/11629/198826/5e37e559E5ee5ce2a/cfb8d362d9d01210.jpg?imageMogr2/strip/format/jpg",
-//                        "name" + i + j, "2020/02/01", (i+j) % 2 == 0 ? "发布成功" : "发布失败",
-//                        "123.1", "123", "0.1", new ArrayList<>()
-//                    )
-//                );
-//            }
-//            userInfoBeans.add(new CacheIdleFishUserConfigBean.CacheIdleFishUserInfoBean(
-//                "user" + i, productBeans
-//            ));
-//        }
-//        this.idleFishUserInfoBean = new CacheIdleFishUserConfigBean(userInfoBeans);
+        List<CacheIdleFishUserInfoBean> userInfoBeans = new ArrayList<>();
+        for (int i = 0; i < 10; i++) {
+            List<CacheIdleFishUserInfoBean.CacheIdleFishProductBean> productBeans = new ArrayList<>();
+            for (int j = 0; j < i * 5 + 1; j++) {
+                productBeans.add(
+                    new CacheIdleFishUserInfoBean.CacheIdleFishProductBean(
+                        "url",
+                        "http://img14.360buyimg.com/imgzone/jfs/t1/91657/8/11629/198826/5e37e559E5ee5ce2a/cfb8d362d9d01210.jpg?imageMogr2/strip/format/jpg",
+                        "name" + i + j, "2020/02/01", (i+j) % 2 == 0 ? "发布成功" : "发布失败",
+                        "123.1", "123", "0.1", new ArrayList<>()
+                    )
+                );
+            }
+            userInfoBeans.add(new CacheIdleFishUserInfoBean(
+                "user" + i, productBeans
+            ));
+        }
+        this.idleFishUserInfoBean = userInfoBeans;
     }
 
-    List<CacheIdleFishUserConfigBean.CacheIdleFishUserInfoBean> getUserInfos() {
-        return idleFishUserInfoBean == null ? new ArrayList<>() : idleFishUserInfoBean.getIdleFishUserInfoBeans();
+    List<CacheIdleFishUserInfoBean> getUserInfos() {
+        return idleFishUserInfoBean;
     }
 
     /**
@@ -86,16 +73,14 @@ class UserInfoManager {
      * @param userName 新用户的用户名
      */
     public void addUser(String userName) {
-        List<CacheIdleFishUserConfigBean.CacheIdleFishUserInfoBean> userInfoBeans =
-                idleFishUserInfoBean.getIdleFishUserInfoBeans();
 
         ThreadUtil.runInWork(() -> {
-            for (CacheIdleFishUserConfigBean.CacheIdleFishUserInfoBean userInfoBean : userInfoBeans) {
+            for (CacheIdleFishUserInfoBean userInfoBean : idleFishUserInfoBean) {
                 if (userInfoBean.getUserName().equals(userName)) {
                     return;
                 }
             }
-            userInfoBeans.add(new CacheIdleFishUserConfigBean.CacheIdleFishUserInfoBean(
+            idleFishUserInfoBean.add(new CacheIdleFishUserInfoBean(
                     userName, new ArrayList<>()
             ));
             saveConfigFile.run();
@@ -108,7 +93,7 @@ class UserInfoManager {
      * @param userName 指定用户
      * @param newProductBean 指定商品数据
      */
-    public void addProduct(String userName, CacheIdleFishUserConfigBean.CacheIdleFishProductBean newProductBean) {
+    public void addProduct(String userName, CacheIdleFishUserInfoBean.CacheIdleFishProductBean newProductBean) {
         ThreadUtil.runInMain(() -> {
             findProductBean(userName, newProductBean, (isFind, userInfoBeans, userInfoBean, productBeans, productBean) -> {
                 if (productBean == null) {
@@ -124,7 +109,7 @@ class UserInfoManager {
      * @param userName 指定用户
      * @param newProductBean 指定商品数据
      */
-    public void removeProduct(String userName, CacheIdleFishUserConfigBean.CacheIdleFishProductBean newProductBean) {
+    public void removeProduct(String userName, CacheIdleFishUserInfoBean.CacheIdleFishProductBean newProductBean) {
         ThreadUtil.runInMain(() -> {
 
             findProductBean(userName, newProductBean, (isFind, userInfoBeans, userInfoBean, productBeans, productBean) -> {
@@ -142,7 +127,7 @@ class UserInfoManager {
      * @param userName 指定用户
      * @param newProductBean 指定商品数据
      */
-    public void updataProduct(String userName, CacheIdleFishUserConfigBean.CacheIdleFishProductBean newProductBean) {
+    public void updataProduct(String userName, CacheIdleFishUserInfoBean.CacheIdleFishProductBean newProductBean) {
         ThreadUtil.runInWork(() -> {
             findProductBean(userName, newProductBean, (isFind, userInfoBeans, userInfoBean, productBeans, productBean) -> {
                 if (productBean != null) {
@@ -160,14 +145,14 @@ class UserInfoManager {
      */
     private void findProductBean(
             String userName,
-            CacheIdleFishUserConfigBean.CacheIdleFishProductBean newProductBean,
+            CacheIdleFishUserInfoBean.CacheIdleFishProductBean newProductBean,
             ForEachCallback callBack) {
 
-        List<CacheIdleFishUserConfigBean.CacheIdleFishUserInfoBean> userInfoBeans = idleFishUserInfoBean.getIdleFishUserInfoBeans();
-        for (CacheIdleFishUserConfigBean.CacheIdleFishUserInfoBean userInfoBean : userInfoBeans){
+        List<CacheIdleFishUserInfoBean> userInfoBeans = idleFishUserInfoBean;
+        for (CacheIdleFishUserInfoBean userInfoBean : userInfoBeans){
             if (userInfoBean.getUserName().equals(userName)) {
-                List<CacheIdleFishUserConfigBean.CacheIdleFishProductBean> productBeans = userInfoBean.getIdleFishProductModelBeans();
-                for (CacheIdleFishUserConfigBean.CacheIdleFishProductBean productBean : productBeans) {
+                List<CacheIdleFishUserInfoBean.CacheIdleFishProductBean> productBeans = userInfoBean.getIdleFishProductModelBeans();
+                for (CacheIdleFishUserInfoBean.CacheIdleFishProductBean productBean : productBeans) {
                     if (productBean.getProductUrl().equals(newProductBean.getProductUrl())) {
                         callBack.accept(
                                 true,
@@ -218,12 +203,12 @@ class UserInfoManager {
     private interface ForEachCallback {
         void accept(
             boolean isFind,
-            List<CacheIdleFishUserConfigBean.CacheIdleFishUserInfoBean> userInfoBeans,
+            List<CacheIdleFishUserInfoBean> userInfoBeans,
             @Nullable
-                CacheIdleFishUserConfigBean.CacheIdleFishUserInfoBean userInfoBean,
+                CacheIdleFishUserInfoBean userInfoBean,
             @Nullable
-                List<CacheIdleFishUserConfigBean.CacheIdleFishProductBean> productBeans,
+                List<CacheIdleFishUserInfoBean.CacheIdleFishProductBean> productBeans,
             @Nullable
-                CacheIdleFishUserConfigBean.CacheIdleFishProductBean productBean);
+                CacheIdleFishUserInfoBean.CacheIdleFishProductBean productBean);
     }
 }

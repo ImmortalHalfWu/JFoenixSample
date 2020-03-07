@@ -1,5 +1,7 @@
 package wu.ui.models.beans;
 
+import com.sun.istack.internal.NotNull;
+import com.sun.istack.internal.Nullable;
 import wu.device.division.NullUiAndroidDevice;
 import wu.device.division.NullUiApp;
 import wu.device.division.UIIdleFishProductBean;
@@ -13,9 +15,12 @@ import java.util.Objects;
 public class UIDevAppProductBindBean {
 
 
-    public static UIDevAppProductBindBean create(UIUserInfoBean userName, List<CacheIdleFishUserConfigBean.CacheIdleFishProductBean> products) {
+    public static UIDevAppProductBindBean create(
+        String userName,
+        List<CacheIdleFishUserInfoBean.CacheIdleFishProductBean> products) {
+
         return new UIDevAppProductBindBean(
-                userName,
+                UIUserInfoBean.create(userName, false),
                 NullUiAndroidDevice.getInstance(),
                 new NullUiApp<>(),
                 products);
@@ -24,7 +29,7 @@ public class UIDevAppProductBindBean {
     public static UIDevAppProductBindBean create(IUiAndroidDevice androidDevice,
                                                  IUiApp<UIIdleFishProductBean, UIUserInfoBean> app,
                                                  UIUserInfoBean userName,
-                                                 List<CacheIdleFishUserConfigBean.CacheIdleFishProductBean> products) {
+                                                 List<CacheIdleFishUserInfoBean.CacheIdleFishProductBean> products) {
         return new UIDevAppProductBindBean(
                 userName,
                 androidDevice,
@@ -33,16 +38,20 @@ public class UIDevAppProductBindBean {
     }
 
 
-    private UIUserInfoBean userName;
-    private IUiAndroidDevice device;
-    private IUiApp<UIIdleFishProductBean, UIUserInfoBean> app;
-    private List<CacheIdleFishUserConfigBean.CacheIdleFishProductBean> products;
+    private @Nullable
+    UIUserInfoBean userName;
+    private @Nullable
+    IUiAndroidDevice device;
+    private @Nullable
+    IUiApp<UIIdleFishProductBean, UIUserInfoBean> app;
+    private @NotNull
+    List<CacheIdleFishUserInfoBean.CacheIdleFishProductBean> products;
 
     private UIDevAppProductBindBean(
             UIUserInfoBean userName,
             IUiAndroidDevice device,
             IUiApp<UIIdleFishProductBean, UIUserInfoBean> app,
-            List<CacheIdleFishUserConfigBean.CacheIdleFishProductBean> products) {
+            List<CacheIdleFishUserInfoBean.CacheIdleFishProductBean> products) {
         this.userName = userName;
         this.device = device;
         this.app = app;
@@ -65,7 +74,7 @@ public class UIDevAppProductBindBean {
         return app;
     }
 
-    public List<CacheIdleFishUserConfigBean.CacheIdleFishProductBean> getProducts() {
+    public List<CacheIdleFishUserInfoBean.CacheIdleFishProductBean> getProducts() {
         return products;
     }
 
@@ -81,7 +90,7 @@ public class UIDevAppProductBindBean {
         this.app = app;
     }
 
-    public void setProducts(List<CacheIdleFishUserConfigBean.CacheIdleFishProductBean> products) {
+    public void setProducts(List<CacheIdleFishUserInfoBean.CacheIdleFishProductBean> products) {
         this.products = products;
     }
 

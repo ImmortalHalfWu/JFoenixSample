@@ -9,7 +9,7 @@ import wu.device.division.UIUserInfoBean;
 import wu.device.division.interfaces.IUiAndroidDevice;
 import wu.device.division.interfaces.IUiApp;
 import wu.device.interfaces.DeviceAppListener;
-import wu.ui.models.beans.CacheIdleFishUserConfigBean;
+import wu.ui.models.beans.CacheIdleFishUserInfoBean;
 import wu.ui.models.beans.UIDevAppProductBindBean;
 import wu.ui.models.interfaces.MainModelListener;
 import wu.ui.utils.ThreadUtil;
@@ -26,9 +26,6 @@ public class MainModel implements DeviceAppListener {
     private UserInfoManager userInfoManager;
     private @NotNull MainModelListener listener;
 
-//    private LinkedHashMap<String, UIDeviceAppBindBean> deviceAppBindMap;
-//    private LinkedHashMap<String, UIAppProductBindBean> appProductBindMap;
-
     public MainModel(@NotNull MainModelListener listener) {
         this.listener = listener;
         devAppProductBindBeans = new ArrayList<>();
@@ -36,13 +33,13 @@ public class MainModel implements DeviceAppListener {
         ThreadUtil.runInWork(() -> {
             userInfoManager = UserInfoManager.getInstance();
 
-            userInfoManager.getUserInfos().forEach(new Consumer<CacheIdleFishUserConfigBean.CacheIdleFishUserInfoBean>() {
+            userInfoManager.getUserInfos().forEach(new Consumer<CacheIdleFishUserInfoBean>() {
                 @Override
-                public void accept(CacheIdleFishUserConfigBean.CacheIdleFishUserInfoBean userInfoBean) {
+                public void accept(CacheIdleFishUserInfoBean userInfoBean) {
                     devAppProductBindBeans.add(
                             UIDevAppProductBindBean.create(
-                                    UIUserInfoBean.createLogout(userInfoBean.getUserName(), "0", false),
-                                    userInfoBean.getIdleFishProductModelBeans()
+                                userInfoBean.getUserName(),
+                                userInfoBean.getIdleFishProductModelBeans()
                             )
                     );
                 }
@@ -76,7 +73,7 @@ public class MainModel implements DeviceAppListener {
         // 新的设备已登录，则查找本地缓存中是否存在相同用户
         for (UIDevAppProductBindBean bean :
                 devAppProductBindBeans) {
-            if (bean.getUserName().equals(userName.getName())) {
+            if (bean.getUserName().getName().equals(userName.getName())) {
                 returnBean = bean;
                 break;
             }
@@ -116,7 +113,7 @@ public class MainModel implements DeviceAppListener {
                 devAppProductBindBeans.remove(bean);
                 listener.deviceDisconnectLogout(devAppProductBindBeans, bean);
             }
-
+            // 当前设备 登录状态, 未连接
             else {
                 bean.setDevice(NullUiAndroidDevice.getInstance());
                 bean.setApp(new NullUiApp<>());

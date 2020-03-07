@@ -7,7 +7,7 @@ public class UIUserInfoBean {
     private final UserInfoBean userInfoBean;
     private final boolean isLogin;
 
-    UIUserInfoBean(UserInfoBean userInfoBean, boolean isLogin) {
+    private UIUserInfoBean(UserInfoBean userInfoBean, boolean isLogin) {
         this.userInfoBean = userInfoBean;
         this.isLogin = isLogin;
     }
@@ -16,8 +16,8 @@ public class UIUserInfoBean {
         return new UIUserInfoBean(new UserInfoBean("未登录", "0"), false);
     }
 
-    public static UIUserInfoBean createLogout(String userName, String postedNum, boolean isLogin) {
-        return new UIUserInfoBean(new UserInfoBean(userName, postedNum), isLogin);
+    public static UIUserInfoBean create(String userName, boolean isLogin) {
+        return new UIUserInfoBean(new UserInfoBean(userName, "0"), isLogin);
     }
 
     public UserInfoBean getUserInfoBean() {

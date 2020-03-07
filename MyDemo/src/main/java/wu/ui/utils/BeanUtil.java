@@ -2,8 +2,14 @@ package wu.ui.utils;
 
 import com.sun.istack.internal.Nullable;
 import immortal.half.wu.FileUtils;
+import wu.ui.models.beans.CacheIdleFishUserInfoBean;
 import wu.ui.weights.DeviceListItemView;
+import wu.ui.weights.ProductListItemView;
 import wu.ui.weights.beans.DeviceItemViewBean;
+import wu.ui.weights.beans.ProductItemViewBean;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class BeanUtil {
 
@@ -77,5 +83,25 @@ public class BeanUtil {
         );
     }
 
+    public static List<ProductListItemView> productBeanConvertToProductItemView(
+        List<CacheIdleFishUserInfoBean.CacheIdleFishProductBean> productBeans) {
+
+        List<ProductItemViewBean> childViewBeanTemps = new ArrayList<>(4);
+        List<ProductListItemView> productViewsTemps  = new ArrayList<>(productBeans.size() / 4);
+
+        int size = productBeans.size();
+
+        for (int i = 0, lineMaxCount = 0; i < size; i++, lineMaxCount++) {
+            if (lineMaxCount == 4 || (i == size - 1  && lineMaxCount > 0)) {
+                productViewsTemps.add(new ProductListItemView(new ArrayList<>(childViewBeanTemps)));
+                childViewBeanTemps.clear();
+                lineMaxCount = 0;
+            }
+            CacheIdleFishUserInfoBean.CacheIdleFishProductBean idleFishProductBean = productBeans.get(i);
+            ProductItemViewBean productItemViewBean = ProductItemViewBean.create(idleFishProductBean, idleFishProductBean);
+            childViewBeanTemps.add(productItemViewBean);
+        }
+        return productViewsTemps;
+    }
 
 }
